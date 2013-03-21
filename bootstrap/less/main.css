@@ -1,0 +1,46 @@
+body {
+  background: #f5f5f5;
+}
+.accordion-group {
+  background: white;
+}
+.accordion-heading a {
+  font-weight: bold;
+}
+.editor {
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#sidebar {
+  width: 200px;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  background: #e6e6e6;
+}
+#main_container {
+  width: auto;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  padding: 20px;
+  padding-left: 220px;
+}
+#coding_zone {
+  width: 69%;
+  height: 100%;
+  padding-right: 2%;
+  float: left;
+}
+#widget_zone {
+  width: 29%;
+  height: 100%;
+  padding: 0;
+  float: left;
+}
+.code_wrap {
+  height: 500px;
+}

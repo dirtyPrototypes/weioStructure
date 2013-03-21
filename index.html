@@ -1,30 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<title>ACE in Action</title>
-<style type="text/css" media="screen">
-    #editor { 
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-</style>
-</head>
-<body>
+<html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="bootstrap/less/bootstrap.css" rel="stylesheet" type="text/css">
 
-<div id="editor">
+<!--<script src="js/less-1.3.3.min.js"></script>
+ -->  </head>
+  <body>
+  <div id="sidebar"><h1>Weio</h1></div>
+  <div id="main_container">
+  <div id="coding_zone">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="bootstrap/js/bootstrap-transition.js"></script>
+    <script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        Main.py
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner code_wrap">
+        
+        
+        <div id="editor" class="editor">
 for a in range (0,10) :
 	print(a)
 
 </div>
     
-<script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/textmate");
     editor.getSession().setMode("ace/mode/python");
 </script>
-</body>
+        
+        
+      </div>
+    </div>
+  </div>
+  
+    <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        Color.py
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse in">
+      <div class="accordion-inner code_wrap">
+        
+        
+        <div id="editor2" class="editor">
+for a in range (0,10) :
+	print(a)
+
+</div>
+    
+
+<script>
+    var editor2 = ace.edit("editor2");
+    editor2.setTheme("ace/theme/textmate");
+    editor2.getSession().setMode("ace/mode/python");
+</script>
+        
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+</div>
+  <div id="widget_zone">
+  <div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionB1" href="#collapseBOne">
+        Console
+      </a>
+    </div>
+    <div id="collapseBOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+        Anim pariatur cliche...
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionB2" href="#collapseBTwo">
+        Documentation
+      </a>
+    </div>
+    <div id="collapseBTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+        Nullam quis risus eget urna mollis ornare vel eu leo. Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue. Cras mattis consectetur purus sit amet fermentum.
+
+Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus.
+
+Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere consectetur est at lobortis.
+
+Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum id ligula porta felis euismod semper. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+
+</div>
+  </body>
 </html>
