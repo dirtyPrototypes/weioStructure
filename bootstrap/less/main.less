@@ -21,6 +21,17 @@ background: rgb(245, 245, 245);
         position: fixed;
         left: 0;
         background: rgb(230, 230, 230);
+        z-index: 1000;
+
+        h1 {
+         display: block;
+         width: 100%;
+         height: 45px;
+         background: rgb(200,200,200) url(../img/weioLogo.png) no-repeat 8px 6px;
+         text-indent: -1000em;
+         margin: 0 0 11px 0;
+
+        }
     }
 #main_container { 
         width: auto;
@@ -49,3 +60,74 @@ background: rgb(245, 245, 245);
     height: 500px;
 }
 
+/* CSS Tree menu styles */
+ol.tree
+{
+    padding: 0;
+    width: 170px;
+    margin-left: 22px;
+}
+    li 
+    { 
+        position: relative; 
+        margin-left: -15px;
+        list-style: none;
+    }
+    li.file
+    {
+        margin-left: -1px !important;
+    }
+        li.file a
+        {
+            background: url(../img/document.png) 0 0 no-repeat;
+            color: #666;
+            padding-left: 21px;
+            text-decoration: none;
+            display: block;
+        }
+        li.file a[href *= '.pdf']   { background: url(../img/document.png) 0 0 no-repeat; }
+        li.file a[href *= '.html']  { background: url(../img/document.png) 0 0 no-repeat; }
+        li.file a[href $= '.css']   { background: url(../img/document.png) 0 0 no-repeat; }
+        li.file a[href $= '.js']        { background: url(../img/document.png) 0 0 no-repeat; }
+    li input
+    {
+        position: absolute;
+        left: 0;
+        margin-left: 0;
+        opacity: 0;
+        z-index: 1000;
+        cursor: pointer;
+        height: 1em;
+        width: 1em;
+        top: 0;
+    }
+        li input + ol
+        {
+            background:  40px 0 no-repeat;
+            margin: -0.938em 0 0 -44px; /* 15px */
+            height: 1em;
+        }
+        li input + ol > li { display: none; margin-left: -14px !important; padding-left: 1px; }
+    li label
+    {
+        background: rgb(250, 250, 250) url(../img/folder-horizontal.png) 6px 3px no-repeat;
+        cursor: pointer;
+        display: block;
+        padding: 1px;
+        padding-left: 30px;
+        color: rgb(153, 153, 153);
+        font-weight: bold;
+        font-size: 13px;
+        box-shadow: 0px 1px 2px rgba(0,0,0,0.1px);
+        border-radius: 2px;
+    }
+
+    li input:checked + ol
+    {
+        background: 40px 5px no-repeat;
+        margin: -1.25em 0 15px -44px; /* 20px */
+        padding: 1.563em 0 0 60px;
+        height: auto;
+    }
+        li input:checked + ol > li { display: block; margin: 0 0 0.125em;  /* 2px */}
+        li input:checked + ol > li:last-child { margin: 0 0 0.063em; /* 1px */ }
