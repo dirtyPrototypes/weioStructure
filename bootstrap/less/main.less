@@ -1,10 +1,11 @@
 body {
-background: rgb(245, 245, 245);
+background: rgb(230, 230, 230);
 }
 .accordion-group {
     background: white;
     margin-bottom: 5px;
     box-shadow: 0px 1px 2px rgba(0,0,0,0.04px);
+    border-color: rgb(218, 218, 218);
 
 }
 .accordion-heading a {
@@ -23,14 +24,14 @@ background: rgb(245, 245, 245);
         height: 100%;
         position: fixed;
         left: 0;
-        background: rgb(230, 230, 230);
+        background: #22262e;
         z-index: 1000;
 
         h1 {
          display: block;
          width: 100%;
          height: 45px;
-         background: rgb(185,185,185) url(../img/weioLogo.png) no-repeat 8px 6px;
+         background: rgba(255, 255, 255, 0.10) url(../img/weioLogo.png) no-repeat 8px 6px;
          text-indent: -1000em;
          margin: 0 0 11px 0;
 
@@ -67,14 +68,14 @@ background: rgb(245, 245, 245);
 ol.tree
 {
     padding: 0;
-    width: 170px;
-    margin-left: 22px;
+    width: 200px;
+    margin-left: 0px;
     font-size: 12px;
 }
     li 
     { 
         position: relative; 
-        margin-left: -15px;
+        margin-left: 0px;
         list-style: none;
     }
     li.file
@@ -84,10 +85,11 @@ ol.tree
         li.file a
         {
             background: url(../img/document.png) 0 0 no-repeat;
-            color: #666;
+            color: #999;
             padding-left: 21px;
             text-decoration: none;
             display: block;
+            margin-bottom: 2px;
         }
         li.file a[href *= '.pdf']   { background: url(../img/document.png) 0 0 no-repeat; }
         li.file a[href *= '.html']  { background: url(../img/document.png) 0 0 no-repeat; }
@@ -114,16 +116,17 @@ ol.tree
         li input + ol > li { display: none; margin-left: -14px !important; padding-left: 1px; }
     li label
     {
-        background: rgb(250, 250, 250) url(../img/folder-horizontal.png) 5px 3px no-repeat;
+        background: rgba(0, 0, 0, 0.08) url(../img/folder-horizontal.png) 5px 4px no-repeat;
         cursor: pointer;
         display: block;
         padding: 1px;
         padding-left: 25px;
-        color: rgb(138, 138, 138);
+        color: white;
         font-weight: bold;
-        font-size: 12px;
+        font-size: 10px;
         box-shadow: 0px 1px 2px rgba(0,0,0,0.05px);
-        border-radius: 2px;
+        text-transform: uppercase;
+
     }
 
     li input:checked + ol
@@ -133,5 +136,5 @@ ol.tree
         padding: 1.563em 0 0 60px;
         height: auto;
     }
-        li input:checked + ol > li { display: block; margin: 0 0 0.125em;  /* 2px */}
-        li input:checked + ol > li:last-child { margin: 0 0 0.063em; /* 1px */ }
+        li input:checked + ol > li { display: block; margin: 0 0 6px;  /* 2px */}
+        li input:checked + ol > li:last-child { margin: 0 0 6px; /* 1px */ }

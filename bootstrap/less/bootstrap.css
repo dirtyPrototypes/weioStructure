@@ -5254,12 +5254,13 @@ a.badge:focus {
   position: fixed;
 }
 body {
-  background: #f5f5f5;
+  background: #e6e6e6;
 }
 .accordion-group {
   background: white;
   margin-bottom: 5px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.04);
+  border-color: #dadada;
 }
 .accordion-heading a {
   font-weight: bold;
@@ -5276,14 +5277,14 @@ body {
   height: 100%;
   position: fixed;
   left: 0;
-  background: #e6e6e6;
+  background: #22262e;
   z-index: 1000;
 }
 #sidebar h1 {
   display: block;
   width: 100%;
   height: 45px;
-  background: #b9b9b9 url(../img/weioLogo.png) no-repeat 8px 6px;
+  background: rgba(255, 255, 255, 0.1) url(../img/weioLogo.png) no-repeat 8px 6px;
   text-indent: -1000em;
   margin: 0 0 11px 0;
 }
@@ -5313,13 +5314,13 @@ body {
 /* CSS Tree menu styles */
 ol.tree {
   padding: 0;
-  width: 170px;
-  margin-left: 22px;
+  width: 200px;
+  margin-left: 0px;
   font-size: 12px;
 }
 li {
   position: relative;
-  margin-left: -15px;
+  margin-left: 0px;
   list-style: none;
 }
 li.file {
@@ -5327,10 +5328,11 @@ li.file {
 }
 li.file a {
   background: url(../img/document.png) 0 0 no-repeat;
-  color: #666;
+  color: #999;
   padding-left: 21px;
   text-decoration: none;
   display: block;
+  margin-bottom: 2px;
 }
 li.file a[href*='.pdf'] {
   background: url(../img/document.png) 0 0 no-repeat;
@@ -5368,16 +5370,16 @@ li input + ol > li {
   padding-left: 1px;
 }
 li label {
-  background: #fafafa url(../img/folder-horizontal.png) 5px 3px no-repeat;
+  background: rgba(0, 0, 0, 0.08) url(../img/folder-horizontal.png) 5px 4px no-repeat;
   cursor: pointer;
   display: block;
   padding: 1px;
   padding-left: 25px;
-  color: #8a8a8a;
+  color: white;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 10px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
-  border-radius: 2px;
+  text-transform: uppercase;
 }
 li input:checked + ol {
   background: 40px 5px no-repeat;
@@ -5389,10 +5391,10 @@ li input:checked + ol {
 }
 li input:checked + ol > li {
   display: block;
-  margin: 0 0 0.125em;
+  margin: 0 0 6px;
   /* 2px */
 }
 li input:checked + ol > li:last-child {
-  margin: 0 0 0.063em;
+  margin: 0 0 6px;
   /* 1px */
 }
