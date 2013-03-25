@@ -3,6 +3,8 @@ body {
 }
 .accordion-group {
   background: white;
+  margin-bottom: 5px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.04);
 }
 .accordion-heading a {
   font-weight: bold;
@@ -26,7 +28,7 @@ body {
   display: block;
   width: 100%;
   height: 45px;
-  background: #c8c8c8 url(../img/weioLogo.png) no-repeat 8px 6px;
+  background: #b9b9b9 url(../img/weioLogo.png) no-repeat 8px 6px;
   text-indent: -1000em;
   margin: 0 0 11px 0;
 }
@@ -58,6 +60,7 @@ ol.tree {
   padding: 0;
   width: 170px;
   margin-left: 22px;
+  font-size: 12px;
 }
 li {
   position: relative;
@@ -110,15 +113,15 @@ li input + ol > li {
   padding-left: 1px;
 }
 li label {
-  background: #fafafa url(../img/folder-horizontal.png) 6px 3px no-repeat;
+  background: #fafafa url(../img/folder-horizontal.png) 5px 3px no-repeat;
   cursor: pointer;
   display: block;
   padding: 1px;
-  padding-left: 30px;
-  color: #999999;
+  padding-left: 25px;
+  color: #8a8a8a;
   font-weight: bold;
-  font-size: 13px;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   border-radius: 2px;
 }
 li input:checked + ol {
