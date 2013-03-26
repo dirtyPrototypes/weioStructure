@@ -33,6 +33,22 @@ body {
   text-indent: -1000em;
   margin: 0 0 11px 0;
 }
+#sidebar #play {
+  display: block;
+  position: absolute;
+  left: 168px;
+  top: 12px;
+  width: 20px;
+  height: 22px;
+  background: url(../img/bt_play.png) no-repeat 0px 0px;
+  text-indent: -1000em;
+  margin: 0;
+  opacity: 0.7;
+  cursor: pointer;
+}
+#sidebar #play:hover {
+  opacity: 1;
+}
 #main_container {
   width: auto;
   height: 100%;
@@ -73,11 +89,14 @@ li.file {
 }
 li.file a {
   background: url(../img/document.png) 0 0 no-repeat;
-  color: #999;
+  color: #c8c8c8;
   padding-left: 21px;
   text-decoration: none;
   display: block;
   margin-bottom: 2px;
+}
+li.file a:hover {
+  color: white;
 }
 li.file a[href*='.pdf'] {
   background: url(../img/document.png) 0 0 no-repeat;
@@ -115,16 +134,16 @@ li input + ol > li {
   padding-left: 1px;
 }
 li label {
-  background: rgba(0, 0, 0, 0.08) url(../img/folder-horizontal.png) 5px 4px no-repeat;
+  background: url(../img/folder-horizontal.png) 7px 4px no-repeat;
   cursor: pointer;
   display: block;
   padding: 1px;
-  padding-left: 25px;
+  padding-left: 28px;
   color: white;
   font-weight: bold;
   font-size: 10px;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   text-transform: uppercase;
+  margin-bottom: 2px;
 }
 li input:checked + ol {
   background: 40px 5px no-repeat;
