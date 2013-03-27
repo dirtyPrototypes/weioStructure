@@ -1,6 +1,9 @@
 body {
 background: rgb(230, 230, 230);
 }
+a {
+    color: rgb(20, 95, 133);
+}
 .accordion-group {
     background: white;
     margin-bottom: 5px;
@@ -51,7 +54,47 @@ background: rgb(230, 230, 230);
          &:hover {
            opacity: 1; 
          };
-
+        
+         }
+         #monitor {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 34px;
+        line-height: 34px;
+        background: rgba(0, 0, 0, 0.20);
+        aside {
+        color: #999;
+        padding-left: 10px;
+        float: left;   
+            &:before {
+            content: "";
+            display: block;
+            height: 10px;
+            width: 10px;
+            border-radius: 10px;
+            background-color: rgb(42, 199, 79);
+            float: left;
+            margin-right: 8px; 
+            margin-top: 12px;
+            }       
+        }
+        #parameters {
+            position: absolute;
+            right: 8px;
+            bottom: 6px;
+            width: 20px;
+            height: 22px;
+            background: url(../img/bt_parametres.png) no-repeat 2px 0px;
+            text-indent: -1000em;
+            opacity: 0.3;
+            cursor: pointer;
+            &:hover {
+                opacity: 1; 
+            };
+        }
         }
     }
 #main_container { 
@@ -64,13 +107,13 @@ background: rgb(230, 230, 230);
 
     }
 #coding_zone { 
-        width: 69%;
+        width: 58%;
         height: 100%;
         padding-right: 2%;
         float: left;
     }
 #widget_zone {
-        width: 29%;
+        width: 40%;
         height: 100%;
         padding: 0;
         float: left;
