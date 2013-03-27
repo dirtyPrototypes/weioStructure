@@ -5319,19 +5319,18 @@ a {
 }
 #sidebar #monitor aside {
   color: #999;
-  padding-left: 10px;
+  padding-left: 0px;
   float: left;
 }
-#sidebar #monitor aside:before {
-  content: "";
+#sidebar #monitor #status {
   display: block;
   height: 10px;
   width: 10px;
   border-radius: 10px;
   background-color: #2ac74f;
   float: left;
-  margin-right: 8px;
-  margin-top: 12px;
+  margin: 12px 8px;
+  text-indent: -1000em;
 }
 #sidebar #monitor #parameters {
   position: absolute;
