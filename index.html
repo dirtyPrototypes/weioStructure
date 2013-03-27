@@ -8,21 +8,27 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script>
 	<!--Get windows size, get number of collapse elements and calculate maximum height to fill the column -->
+	
 	var viewportHeight = $(window).height();
 	
-	$( document ).ready(function() {
-	var numRows = $('.collapse').length;
+	<!--global function. Can be recalled when adding a new stripe to recalculate max height value -->
+	function update_height() {
+		var numRows = $('.codebox').length;
+		var finalheight = viewportHeight - (numRows * 40) - 60;
+		var widgetheight = viewportHeight - 140;
+		$('.code_wrap').css('min-height', finalheight);
+		$('.fullheight').css('height', widgetheight);
+	}
 	
-	var finalheight = viewportHeight - ((numRows-1) * 40) - 20;
-	$('.code_wrap').css('min-height', finalheight);
-	$('.fullheight').css('min-height', finalheight);
-	});
-	
-	
+	$(document).ready(function () {
+    update_height();
+    
+	$(window).resize(function() {
+        update_height();
+    });
+});
 	</script>
-
-<!--<script src="js/less-1.3.3.min.js"></script>
- -->  </head>
+ </head>
   <body>
   <div id="sidebar"><h1>Weio</h1>
   <a id="play">Execute</a>
@@ -137,7 +143,7 @@
         Main.py
       </a>
     </div>
-    <div id="collapseOne" class="accordion-body collapse in">
+    <div id="collapseOne" class="accordion-body collapse in codebox">
       <div class="accordion-inner code_wrap">
         
         
@@ -165,7 +171,7 @@ for a in range (0,10) :
         Color.py
       </a>
     </div>
-    <div id="collapseTwo" class="accordion-body collapse">
+    <div id="collapseTwo" class="accordion-body collapse codebox">
       <div class="accordion-inner code_wrap">
         
         
@@ -186,6 +192,7 @@ for a in range (0,10) :
       </div>
     </div>
   </div>
+  
   
 </div>
 </div>
