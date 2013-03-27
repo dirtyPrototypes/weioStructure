@@ -1,5 +1,6 @@
 body {
   background: #e6e6e6;
+  height: 100%;
 }
 a {
   color: #145f85;
@@ -12,6 +13,9 @@ a {
 }
 .accordion-heading a {
   font-weight: bold;
+}
+.accordion-body.in.collapse {
+  min-height: 85%;
 }
 .editor {
   position: relative;
@@ -111,8 +115,9 @@ a {
   padding: 0;
   float: left;
 }
-.code_wrap {
-  height: 500px;
+.fullheight {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 /* CSS Tree menu styles */
 ol.tree {

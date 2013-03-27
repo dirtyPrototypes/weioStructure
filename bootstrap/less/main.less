@@ -1,5 +1,6 @@
 body {
 background: rgb(230, 230, 230);
+height:100%;
 }
 a {
     color: rgb(20, 95, 133);
@@ -13,6 +14,9 @@ a {
 }
 .accordion-heading a {
     font-weight: bold;
+}
+.accordion-body.in.collapse {
+    min-height:85%;
 }
 .editor { 
         position: relative;
@@ -120,8 +124,12 @@ a {
    
 } 
 
-.code_wrap {
-    height: 500px;
+// .code_wrap {
+//     height: 500px;
+// }
+.fullheight {
+    overflow-x: hidden;
+    overflow-y: auto; 
 }
 
 /* CSS Tree menu styles */
