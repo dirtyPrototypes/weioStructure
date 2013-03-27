@@ -5313,13 +5313,13 @@ body {
   padding-left: 220px;
 }
 #coding_zone {
-  width: 69%;
+  width: 58%;
   height: 100%;
   padding-right: 2%;
   float: left;
 }
 #widget_zone {
-  width: 29%;
+  width: 40%;
   height: 100%;
   padding: 0;
   float: left;
