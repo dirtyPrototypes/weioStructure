@@ -64,29 +64,42 @@
 
 	$(document).ready(function () {
 		
-		// FILE TREE SIDEBAR ZONE
-		compiledTree = $('ol.tree').compile(directiveFileTree);
-		renderFileTree();
-		
+	
 		// EDITOR ZONE
 		update_height();
 		compiledEditor = $('div.accordion').compile(directiveEditors);
 		renderEditors();
 		insertEditors();
+		
 		collapseAllExceptFocusedOne();
+		
+		// FILE TREE SIDEBAR ZONE
+		compiledTree = $('ol.tree').compile(directiveFileTree);
+		renderFileTree();
 
 		$(window).resize(function() {
 			update_height();
 		});
 	});
 
-	// this is JSON file entering point for editors
+	// JSON file, entering point for editors
 	var editorData = {
 		editors:[
 		{name:"weio_main.py", id:"0", type : "python", data : "a = 10"}
 		]
 	};
+	
+	// JSON file, entering point for tree
+	var fileTreeData = {
+		tree:[
+		{name:"weio_main.py", id:"0", type : "python"},
+		{name:"index.html", id:"1", type : "html"},
+		{name:"test.py", id:"2", type : "python"},
+		{name:"new.py", id:"3", type : "python"}
+		]
+	};
 
+	
 	// this is directive for templating editors with Pure JS
 	var directiveEditors = {
 		'div.accordion-group' :{
@@ -104,6 +117,16 @@
 				'#dontSave@onclick' : function getter(arg) {dontSave = true; return "saveAndClose()";}
 			}
 
+		}
+	};
+	
+	// this is directive for templating tree with Pure JS
+	var directiveFileTree = {
+		'li.file' :{
+			'file<-tree' : {
+				'a@onclick' : function getter(arg) {return 'addNewStrip("' + arg.item.name + '")';},
+				'a' : 'file.name'
+			}
 		}
 	};
 
@@ -219,8 +242,8 @@
 	    	editorData.editors.push(newData);
 	
 			// render changes to HTML
-			update_height();
 			renderEditors();
+			update_height();
 			insertEditors();
 		} 
 		
@@ -258,27 +281,7 @@
 		
 <!-- FILE TREE TEMPLATE ENDS HERE -->	
 
-<script>
 
-var fileTreeData = {
-	tree:[
-	{name:"weio_main.py", id:"0", type : "python"},
-	{name:"index.html", id:"1", type : "html"},
-	{name:"test.py", id:"2", type : "python"},
-	{name:"new.py", id:"3", type : "python"}
-	]
-};
-
-var directiveFileTree = {
-	'li.file' :{
-		'file<-tree' : {
-			'a@onclick' : function getter(arg) {return 'addNewStrip("' + arg.item.name + '")';},
-			'a' : 'file.name'
-		}
-	}
-};
-
-</script>
 	
 	</div id="sidebar">
 
@@ -299,7 +302,7 @@ var directiveFileTree = {
 						<a href="#saveFile" role="button"id="saveButton" data-toggle="modal"><i class="icon-save"></i></a>
 
 						<!-- Close Editor Modal -->
-						<div id="closeFileModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div id="closeFileModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
 								<h3 class = "removeModalPhrase" id="myModalLabel"></h3>
