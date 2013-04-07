@@ -11,11 +11,23 @@ a {
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.04);
   border-color: #dadada;
 }
+.accordion-heading {
+  display: block;
+  position: relative;
+}
 .accordion-heading a {
   font-weight: bold;
 }
 .accordion-body.in.collapse {
   min-height: 85%;
+}
+.actions {
+  display: block;
+  position: absolute;
+  right: 3px;
+}
+.actions #saveButton {
+  margin: 10px 5px;
 }
 .editor {
   position: relative;
