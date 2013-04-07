@@ -55,7 +55,9 @@
 	
 	// this variable decide if file will be saved in closing procedure
 	var dontSave = false;
-
+	
+	// this variable informs if weio_main.py is running on Weio board
+	var isPlaying = false;
 
 	// first initialization and compilation of templates, compilation only occurs
 	// once, here.
@@ -64,6 +66,7 @@
 
 	$(document).ready(function () {
 		
+		updatePlayStatus();
 	
 		// EDITOR ZONE
 		update_height();
@@ -81,6 +84,18 @@
 			update_height();
 		});
 	});
+	
+	// PLAY BUTTON
+	
+	function updatePlayStatus() {
+		if (isPlaying) {
+			$('#play').html('<i class="icon-pause"></i>');
+		} else {
+			$('#play').html('<i class="icon-play"></i>');
+		}
+	}
+	
+	
 
 	// JSON file, entering point for editors
 	var editorData = {
@@ -259,11 +274,11 @@
 <body>
 
 	<div id="sidebar"><h1>Weio</h1>
-		<a id="play">Execute</a>
+		<a id="play" onclick="play()"></a>
 		<div id="monitor">
-			<aside id="status">ON</aside>
+			<aside id="status"></aside>
 			<aside>Weio 0.5</aside>
-			<a id="parameters">Parameters</a>
+			<a id="parameters"><i class="icon-cog"></i></a>
 		</div>
 
 <!-- FILE TREE TEMPLATE STARTS HERE -->
