@@ -5266,11 +5266,23 @@ a {
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.04);
   border-color: #dadada;
 }
+.accordion-heading {
+  display: block;
+  position: relative;
+}
 .accordion-heading a {
   font-weight: bold;
 }
 .accordion-body.in.collapse {
   min-height: 85%;
+}
+.actions {
+  display: block;
+  position: absolute;
+  right: 3px;
+}
+.actions #saveButton {
+  margin: 10px 5px;
 }
 .editor {
   position: relative;
@@ -5302,8 +5314,12 @@ a {
   top: 12px;
   width: 20px;
   height: 22px;
-  background: url(../img/bt_play.png) no-repeat 0px 0px;
-  text-indent: -1000em;
+  /*background: url(../img/bt_play.png) no-repeat 0px 0px;*/
+
+  /*text-indent: -1000em;*/
+
+  text-decoration: none;
+  color: white;
   margin: 0;
   opacity: 0.7;
   cursor: pointer;
@@ -5339,12 +5355,15 @@ a {
 #sidebar #monitor #parameters {
   position: absolute;
   right: 8px;
-  bottom: 6px;
+  bottom: 12px;
   width: 20px;
   height: 22px;
-  background: url(../img/bt_parametres.png) no-repeat 2px 0px;
-  text-indent: -1000em;
+  /*background: url(../img/bt_parametres.png) no-repeat 2px 0px;
+            text-indent: -1000em;*/
+
   opacity: 0.3;
+  text-decoration: none;
+  color: white;
   cursor: pointer;
 }
 #sidebar #monitor #parameters:hover {
@@ -5392,8 +5411,9 @@ a {
 }
 #widget_zone {
   width: 40%;
-  height: 100%;
   padding: 0;
+  padding-right: 100px;
+  height: 100%;
   float: left;
 }
 .fullheight {
