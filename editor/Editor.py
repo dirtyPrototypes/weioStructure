@@ -28,6 +28,7 @@ class WeioEditorHandler(SockJSConnection):
     def on_message(self, data):
         self.serve(data)
         
+        
     def serve(self, request) :
            
            rq = ast.literal_eval(request)
@@ -92,8 +93,8 @@ class WeioEditorHandler(SockJSConnection):
 
                #launch process
             
-               t = tornado_subprocess.Subprocess(self.on_subprocess_result, args=['python', '-u', processName] )
-               t.start()
+               weio_main = tornado_subprocess.Subprocess(self.on_subprocess_result, args=['python', '-u', processName] )
+               weio_main.start()
                
                print("weio_main indipendent process launching...")
                
@@ -106,15 +107,90 @@ class WeioEditorHandler(SockJSConnection):
                #                self.runningState.start()
                #                
                
-           elif 'stop' in rg['request']:
-               pipe.kill()
+               #####################################
+               # open UNIX DOMAIN SOCKET
+               #####################################
                
+               # TODO pass type of socket in constructor
+               sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM, 0)
+               sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+               sock.setblocking(0)
+               server_address = "uds_weio_main"
+
+               # Make sure the socket does not already exist
+               try:
+                   os.unlink(server_address)
+               except OSError:
+                   if os.path.exists(server_address):
+                       raise
+
+               sock.bind(server_address)
+               # how many connections I can accept
+               sock.listen(10)
+               
+               ioloopObj = ioloop.IOLoop.instance()
+               
+               callback = functools.partial(self.socket_connection_ready, sock)
+               ioloopObj.add_handler(sock.fileno(), callback, ioloopObj.READ)
+               
+           elif 'stop' in rg['request']:
+               weio_main.stop()
                data = {}
                data['serverPush'] = 'stopped'
                
                self.send(json.dumps(data))
                
                
+    def socket_connection_ready(self, sock, fd, events):
+       global stream
+
+
+       print "CONNECTION READY"
+       while True:
+           print "AAA"
+           try:
+               connection, address = sock.accept()
+               print "client connected to UNIX domain socket"
+           except socket.error, e:
+               print "HERE"
+               if e[0] not in (errno.EWOULDBLOCK, errno.EAGAIN):
+                   raise
+               return
+           connection.setblocking(0)
+           global stream
+           stream = iostream.IOStream(connection)
+          
+           stream.read_until_close(self.socket_on_close, self.socket_on_headers)
+          
+           
+    def socket_on_headers(self, data):
+       print "-> ENTER on_headers()"
+       #print(data.rstrip())
+       
+       #rcvd = ast.literal_eval(data)
+       #rcvd = json.load(data)
+       #print rcvd["stdout"]
+       print data
+       # pack and send to client
+       
+       #data['serverPush'] = 'stdout'
+       #data['data'] = rcvd['stdout']
+       #self.send(json.dumps(data))
+  
+       #global stream
+       #stream.write("OK, zatvori Mile...")
+       #stream.read_until("\t", on_close)
+       print "<- EXIT on_headers()"
+
+    def socket_on_close(self, data):
+       print "-> ENTER on_close()"
+       print(data.rstrip())
+
+       global stream
+       stream.close()
+       print "closed socket"
+       print "<- EXIT on_close()"   
+           
                
     def on_subprocess_result(self, status, stdout, stderr ):
         
@@ -196,5 +272,3 @@ class WeioEditorHandler(SockJSConnection):
             data['serverPush'] = 'stopped'
         
             self.send(json.dumps(data))
-
-            
