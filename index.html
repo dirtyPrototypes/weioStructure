@@ -99,8 +99,8 @@ Nodesign.net 2013 -->
 		renderFileTree();	
 	};
 
-	// JSON file, entering point for editors
-	var editorData = {editors:[]};
+	// JSON file, entering point for editors and tree - list of files
+	var editorData = {editors:[], tree:[]};
 	
 	/* EXAMPLE
 	var editorData = {
@@ -109,10 +109,6 @@ Nodesign.net 2013 -->
 		]
 	};
 	*/
-	
-	
-	// JSON file, entering point for tree
-	var fileTreeData = {};
 	
 	/* EXAMPLE
 	var fileTreeData = {
@@ -187,7 +183,7 @@ Nodesign.net 2013 -->
 	
 	// call this function each time when change occurs in tree that has to be rendered
 	function renderFileTree() {
-		$('ol.tree').render(fileTreeData, compiledTree);
+		$('ol.tree').render(editorData, compiledTree);
 	}
 
 	// // this function implements ace editors and dispach data inside empty strips
@@ -324,9 +320,9 @@ Nodesign.net 2013 -->
 		
 		var newData;
 
-		for (var file in fileTreeData.tree) {
-			if (fileTreeData.tree[file].name==filename) {
-				newData = fileTreeData.tree[file];
+		for (var file in editorData.tree) {
+			if (editorData.tree[file].name==filename) {
+				newData = editorData.tree[file];
 				break;
 			}
 		}
@@ -405,7 +401,7 @@ Nodesign.net 2013 -->
 				console.log(fileList.allFiles);
 				
 				
-				fileTreeData = {'tree':fileList.allFiles}; 
+				editorData.tree = fileList.allFiles; 
 				initEditor();
 				
 				
