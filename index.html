@@ -8,6 +8,7 @@ Nodesign.net 2013 -->
 	<!-- Bootstrap -->
 	<link href="bootstrap/less/bootstrap.css" rel="stylesheet" type="text/css">
 	<script src="js/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="bootstrap/js/bootstrap-collapse.js"></script>
 	<script src="bootstrap/js/bootstrap-transition.js"></script>
@@ -463,11 +464,14 @@ Nodesign.net 2013 -->
 
 
 	</script>
+
+    
+    
 </head>
 <body>
 	
 	<div id="sidebar"><h1>Weio</h1>
-	    <a id="hide" onclick="hide_sidebar()"><i class="icon-play"></i></a>
+	    <button id="hide" class="open"><i class="icon-play"></i></button>
 		<a id="play" onclick="play()"></a>
 		<div id="monitor">
 			<aside id="status">ON</aside>
@@ -597,6 +601,26 @@ Nodesign.net 2013 -->
 
 			</div>
 			</div id="main_container">
+    
+<!--Sidebar Resize animation START -->
+<script>
+$("#hide").click(function(){
+	
+if ($(this).is(".open")) {
+  	$( "#sidebar" ).animate( { left: "-160px" }, { queue: false, duration: 100 });
+    $( "#main_container" ).animate( { paddingLeft: "60px" }, { queue: false, duration: 100 });
+	$(this).attr('class', 'closed');
+} 
+else if ($(this).is(".closed")) {
+ 	$( "#sidebar" ).animate( { left: "0px" }, { queue: false, duration: 100 });
+    $( "#main_container" ).animate( { paddingLeft: "220px" }, { queue: false, duration: 100 });
+	$(this).attr('class', 'open');
+} else {
+}
 
+});
+ 
+</script>
+ <!--Sidebar Resize animation END-->
 		</body>
 </html>

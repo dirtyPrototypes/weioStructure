@@ -115,7 +115,7 @@ a {
   opacity: 1;
 }
 #main_container {
-  width: 100%;
+  width: 100% -200px;
   height: 100%;
   position: fixed;
   left: 0;
