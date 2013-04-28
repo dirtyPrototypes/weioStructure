@@ -14,6 +14,8 @@ import WeioFiles
 import json
 import ast
 
+import pickle
+
 p = None
 
 class WeioEditorHandler(SockJSConnection):
@@ -165,17 +167,19 @@ class WeioEditorHandler(SockJSConnection):
            
     def socket_on_headers(self, data):
        print "-> ENTER on_headers()"
-       #print(data.rstrip())
        
-       #rcvd = ast.literal_eval(data)
-       #rcvd = json.load(data)
-       #print rcvd["stdout"]
-       print data
+       rcvd = pickle.loads(data)
+       print rcvd
+       
+       #print rcvd['stdout']
+       
        # pack and send to client
        
-       #data['serverPush'] = 'stdout'
-       #data['data'] = rcvd['stdout']
-       #self.send(json.dumps(data))
+       data = {}
+       
+       data['serverPush'] = 'stdout'
+       data['data'] = rcvd['stdout']
+       self.send(json.dumps(data))
   
        #global stream
        #stream.write("OK, zatvori Mile...")
@@ -192,7 +196,7 @@ class WeioEditorHandler(SockJSConnection):
        print "<- EXIT on_close()"   
            
                
-    def on_subprocess_result(self, status, stdout, stderr ):
+    def on_subprocess_result(self, status, stdout, stderr, has_timed_out ):
         
         print status, stdout, stderr
         if status == 0:

@@ -6,6 +6,8 @@ import time
 import sys
 import json
 
+import pickle
+
 def send_request():
     
     print "hello"
@@ -17,18 +19,32 @@ def send_request():
     ioloop.IOLoop.instance().stop()
 
 class StdOutputToSocket():
-     def write(self, msg):
-         out = {}
-         out['stdout'] = msg
-         stream.write(json.dumps(out))
+    global out
+    out = {}
+    
+    def write(self, msg):
+        global out
+        if "\n" in msg :
+            out['stdout'] = out['stdout'] + msg
+            stream.write(pickle.dumps(out))
+            #stream.write(json.dumps(out))
+        else :
+            out['stdout'] = msg
          
 class StdErrToSocket():
+    global out
+    out = {}
+    
     def write(self, msg):
-        out = {}
-        out['stderr'] = msg
-        stream.write(json.dumps(out))
-
-
+        global out
+        if "\n" in msg :
+            out['stderr'] = out['stderr'] + msg
+            stream.write(pickle.dumps(out))
+            #stream.write(json.dumps(out))
+        else :
+            out['stderr'] = msg
+            
+            
 s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM, 0)
 stream = iostream.IOStream(s)
 stream.connect("uds_weio_main", send_request)
