@@ -4,16 +4,16 @@ from tornado import iostream
 import socket
 import time
 import sys
-import json
 
 import pickle
 
 def send_request():
     
     print "hello"
+    print "dsvkjbjkbv"
     for a in range(10) :
-        print(str(a))
-        time.sleep(1)
+        printd(str(a))
+        time.sleep(0.2)
         
     stream.close()
     ioloop.IOLoop.instance().stop()
@@ -38,11 +38,11 @@ class StdErrToSocket():
     def write(self, msg):
         global out
         if "\n" in msg :
-            out['stderr'] = out['stderr'] + msg
+            out['stdout'] = out['stdout'] + msg
             stream.write(pickle.dumps(out))
             #stream.write(json.dumps(out))
         else :
-            out['stderr'] = msg
+            out['stdout'] = msg
             
             
 s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM, 0)

@@ -95,7 +95,7 @@ class WeioEditorHandler(SockJSConnection):
 
                #launch process
             
-               weio_main = tornado_subprocess.Subprocess(self.on_subprocess_result, args=['python', '-u', processName] )
+               weio_main = tornado_subprocess.Subprocess(self.on_subprocess_result, args=['python', processName])
                weio_main.start()
                
                print("weio_main indipendent process launching...")
@@ -171,15 +171,7 @@ class WeioEditorHandler(SockJSConnection):
        rcvd = pickle.loads(data)
        print rcvd
        
-       #print rcvd['stdout']
-       
-       # pack and send to client
-       
-       data = {}
-       
-       data['serverPush'] = 'stdout'
-       data['data'] = rcvd['stdout']
-       self.send(json.dumps(data))
+       self.sendToBrowser(rcvd)
   
        #global stream
        #stream.write("OK, zatvori Mile...")
@@ -187,15 +179,40 @@ class WeioEditorHandler(SockJSConnection):
        print "<- EXIT on_headers()"
 
     def socket_on_close(self, data):
+       # here error happens and socket will be closed
+       
        print "-> ENTER on_close()"
-       print(data.rstrip())
-
+       
+       rcvd = pickle.loads(data)
+       
+       #print "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+       #print rcvd
+       #print "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+        
+       err = {}
+       err['stderr'] = rcvd['stdout']
+       
+       self.sendToBrowser(err)
+           
        global stream
        stream.close()
        print "closed socket"
-       print "<- EXIT on_close()"   
+       print "<- EXIT on_close()"
+       
+    def sendToBrowser(self, rcvd) :
+      # pack and send to client
+      
+       data = {}
+
+       if 'stdout' in rcvd :
+           data['serverPush'] = 'stdout'
+           data['data'] = rcvd['stdout']
+       elif 'stderr' in rcvd :
+           data['serverPush'] = 'stderr'
+           data['data'] = rcvd['stderr']
+
+       self.send(json.dumps(data))
            
-               
     def on_subprocess_result(self, status, stdout, stderr, has_timed_out ):
         
         print status, stdout, stderr
@@ -204,6 +221,7 @@ class WeioEditorHandler(SockJSConnection):
             print stdout
         else:
             print "ERROR:"
+            print stdout
             print stderr
                 
                 # 

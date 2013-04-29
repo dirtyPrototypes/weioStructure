@@ -62,6 +62,12 @@ Nodesign.net 2013 -->
 
 	// this variable informs if weio_main.py is running on Weio board
 	var isPlaying = false;
+	
+	// this is console data array, stout and stderr
+	var consoleData = [];
+	
+	// maximum lines in console
+	var MAX_LINES_IN_CONSOLE = 1000;
 
 	// first initialization and compilation of templates, compilation only occurs
 	// once, here.
@@ -432,14 +438,47 @@ Nodesign.net 2013 -->
 			demand = data.serverPush;
 			if (demand == "stdout") {
 				
+				
 				stdout = data.data;
+				
+				consoleData.push(stdout);
+				
+				if (consoleData.length>MAX_LINES_IN_CONSOLE) {
+				    consoleData.shift();
+				}
+				
+				
+				consoleOutput = "";
+				
+				for (var i=0; i<consoleData.length; i++) {
+				    consoleData[i] = consoleData[i].replace("\n", "<BR>");
+				    consoleOutput+=consoleData[i];
+				}
+				$('#consoleOutput').html(consoleOutput);
+				
 				console.log(stdout);
+				
+				
 			} else if (demand == "stderr") {
 				
 				stderr = data.data;
 				
-				errorInFile = data.errorInFile;
-				errInLine = data.errInLine;
+				consoleData.push('<font color="red">' + stderr + '</font>');
+				
+				if (consoleData.length>MAX_LINES_IN_CONSOLE) {
+				    consoleData.shift();
+				}
+				
+				consoleOutput = "";
+				
+				for (var i=0; i<consoleData.length; i++) {
+				    consoleData[i] = consoleData[i].replace("\n", "<BR>");
+				    consoleOutput+=consoleData[i];
+				}
+				$('#consoleOutput').html(consoleOutput);
+				
+				//errorInFile = data.errorInFile;
+				//errInLine = data.errInLine;
 				
 				console.log(stderr);
 			} else if (demand == "stopped") {
@@ -581,7 +620,7 @@ Nodesign.net 2013 -->
 			    </div>
 			    <div id="collapseW1" class="accordion-body collapse in">
 			      <div class="accordion-inner">
-			    	
+			    	<p id="consoleOutput"></p>
 			      </div>
 			    </div>
 			  </div>
