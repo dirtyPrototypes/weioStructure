@@ -4,16 +4,33 @@ from tornado import iostream
 import socket
 import time
 import sys
+from weio_gpio import *
+from weio_globals import *
+
 
 import pickle
 
 def send_request():
+   
+    pin = 16
     
     print "hello"
-    print "dsvkjbjkbv"
-    for a in range(10) :
-        printd(str(a))
-        time.sleep(0.2)
+    pinMode(pin, OUTPUT)
+    
+    for a in range(4) :
+        digitalWrite(pin, HIGH)
+        time.sleep(0.5)
+        digitalWrite(pin, LOW)
+        time.sleep(0.5)
+    
+    print "waiting"
+    time.sleep(3)
+    print "reading"
+    pinMode(pin, INPUT)
+    val = digitalRead(pin)
+    print val
+    print "finished"
+    
         
     stream.close()
     ioloop.IOLoop.instance().stop()
