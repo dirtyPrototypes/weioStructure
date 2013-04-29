@@ -17,7 +17,7 @@ def digitalWrite(pin, state) :
         inputFile = open("/sys/devices/virtual/gpio/gpio" + str(pin) + "/value", "w")
         rep = inputFile.write(state)
         inputFile.close()
-    print "WEIO says : pin " + str(pin) + " is not accessible, did you declared pinmode(pin, direction)?"
+    print "WEIO says : pin " + str(pin) + " is not accessible, did you declare pinmode(pin, direction)?"
         
 def digitalRead(pin) :
     if os.path.exists("/sys/devices/virtual/gpio/gpio" + str(pin) + "/value") :
@@ -25,5 +25,5 @@ def digitalRead(pin) :
         rep = inputFile.read()
         return rep
     else :
-        print "WEIO says : pin " + str(pin) + " is not accessible, did you declared pinmode(pin, direction)?"
+        print "WEIO says : pin " + str(pin) + " is not accessible, did you declare pinmode(pin, direction)?"
         return None
