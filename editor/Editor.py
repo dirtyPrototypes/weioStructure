@@ -91,7 +91,7 @@ class WeioEditorHandler(SockJSConnection):
                
            elif 'play' in rq['request']:
                
-               processName = './editor/user_weio/weio_main.py'
+               processName = './static/user_weio/weio_main.py'
 
                #launch process
             

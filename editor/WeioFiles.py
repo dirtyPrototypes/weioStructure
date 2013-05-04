@@ -24,7 +24,7 @@ def scanFolders() :
     allFiles = []
     allFolders = []
     
-    for dirname, dirnames, filenames in os.walk('./editor/user_weio'):
+    for dirname, dirnames, filenames in os.walk('./static/user_weio'):
         # print path to all subdirectories first.
         for subdirname in dirnames:
             #print os.path.join(dirname, subdirname)
@@ -99,7 +99,7 @@ def checkIfPathIsInUserFolder(path):
     
     """This function checks if given path is in user folder user_weio/"""
     
-    if "./editor/user_weio" in (path) :
+    if "./static/user_weio" in (path) :
         return True
     else :
         return False
