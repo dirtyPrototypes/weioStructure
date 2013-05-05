@@ -3,18 +3,19 @@ import os
 def pinMode(pin, dir) :
     """pinMode function defines if GPIO is in OUTPUT mode (actioner) or in INPUT mode (sensor)"""
     s_pin = str(pin)
-    if os.path.exists("/sys/class/gpio/export") :
-        inputFile = open("/sys/class/gpio/export", "w")
-        rep = inputFile.write(s_pin)
+
+    # if os.path.exists("/sys/class/gpio/export") :
+    #        inputFile = open("/sys/class/gpio/export", "w")
+    #        rep = inputFile.write(s_pin)
+    #        inputFile.close()
+
+    if os.path.exists("/sys/devices/virtual/gpio/gpio" + s_pin + "/direction") :
+        inputFile = open("/sys/devices/virtual/gpio/gpio" + s_pin + "/direction", "w")
+        rep = inputFile.write(dir)
         inputFile.close()
-        if os.path.exists("/sys/devices/virtual/gpio/gpio" + s_pin + "/direction") :
-            inputFile = open("/sys/devices/virtual/gpio/gpio" + s_pin + "/direction", "w")
-            rep = inputFile.write(dir)
-            inputFile.close()
-        else :
-            print "WEIO says : pin " + str(pin) + " is busy or non existant"
     else :
-        print "WEIO says : gpio driver non existant"
+        print "WEIO says : pin " + str(pin) + " is busy or non existant"
+
 
 def digitalWrite(pin, state) :
     """Digital write will set voltage +3.3V or Ground on corresponding pin. This function takes two parameters : pin number and it's state that can be HIGH = +3.3V or LOW = Ground"""
