@@ -24,7 +24,7 @@ class WeioEditorHandler(SockJSConnection):
     def on_open(self, data):
         """On open asks weio for last saved project. List of files are scaned and sent to editor.
         Only contents of weio_main.py is sent at first time"""
-        
+        pass
         
         
     def on_message(self, data):

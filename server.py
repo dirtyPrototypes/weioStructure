@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-from tornado import web, ioloop, iostream, options, httpserver
+from tornado import web, ioloop, iostream, options, httpserver, autoreload
 from sockjs.tornado import SockJSRouter, SockJSConnection
 
 # IMPORT EDITOR CLASSES
@@ -8,7 +8,11 @@ from editor import Editor #, WeioEditorStopHandler, WeioEditorPlayHandler
 
 class WeioIndexHandler(web.RequestHandler):
     def get(self):
-        self.render('index.html', error="")
+        self.render('static/user_weio/index.html', error="")
+        
+class WeioEditorWebHandler(web.RequestHandler):
+    def get(self):
+        self.render('editor/index.html', error="")
 
 class CloseConnection(SockJSConnection):
     def on_open(self, info):
@@ -16,11 +20,14 @@ class CloseConnection(SockJSConnection):
 
     def on_message(self, msg):
         pass
-
+        
 
 if __name__ == '__main__':
     import logging
     logging.getLogger().setLevel(logging.DEBUG)
+
+    # WEIO API BRIDGE
+   # WeioAPIBridgeRouter = SockJSRouter(Editor.WeioEditorHandler, '/weioAPI')
 
     # EDITOR ROUTES
     WeioEditorRouter = SockJSRouter(Editor.WeioEditorHandler, '/editor/baseFiles')    
@@ -40,13 +47,27 @@ if __name__ == '__main__':
     #GENERAL ROUTES
     CloseRouter = SockJSRouter(CloseConnection, '/close')
 
+    
+    
 
     app = web.Application(list(WeioEditorRouter.urls) +
                           list(CloseRouter.urls) +
-                          [(r"/", WeioIndexHandler),(r"/(.*)", web.StaticFileHandler,
-                            					    {"path": "./static", "default_filename": "index.html"})
-                          ]
+                          #list(WeioAPIBridgeRouter.urls) +
+                          [(r"/editor",WeioEditorWebHandler)] +
+                          [(r"/", WeioIndexHandler),(r"/(.*)", web.StaticFileHandler,{"path": "./static"})], debug=True
                           )
+                          # DEBUG WILL DECREASE SPEED!!! HOW TO AVOID THIS???
+        
+
+                          # app = web.Application(list(WeioEditorRouter.urls) +
+                          #                       list(CloseRouter.urls) +
+                          #                       #list(WeioAPIBridgeRouter.urls) +
+                          #                       [(r"/editor",WeioEditorWebHandler)] +
+                          #                       [(r"/", WeioIndexHandler),(r"/(.*)", StaticFileHandlerNoCache,
+                          #                                                 {"path": "./static"})
+                          #                       ]
+                          #                       )
+                          # 
 
     options.define("port", default=8081, type=int)
     
@@ -55,4 +76,16 @@ if __name__ == '__main__':
     
     #app.listen(8081)
     logging.info(" [*] Listening on 0.0.0.0:8081")
+    
+    # WATCHERS ONLY FOR DEBUG MODE, no need in debug=True
+    
+    # when some of these files change, tornado will reboot to serve all modifications, other files than python modules need to 
+    # be specified manually
+    #autoreload.watch('./editor/index.html')
+    #autoreload.watch('./static/user_weio/index.html')
+    
+    # this will start wathcing process, note that all python modules that has been modified will be reloaded directly
+    #autoreload.start(ioloop.IOLoop.instance())
+    
+    # STARTING SERVER
     ioloop.IOLoop.instance().start()
