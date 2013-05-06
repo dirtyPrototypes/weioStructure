@@ -8,7 +8,7 @@ from editor import Editor #, WeioEditorStopHandler, WeioEditorPlayHandler
 
 class WeioIndexHandler(web.RequestHandler):
     def get(self):
-        self.render('static/user_weio/index.html', error="")
+        self.render('static/index.html', error="")
         
 class WeioEditorWebHandler(web.RequestHandler):
     def get(self):
@@ -54,7 +54,8 @@ if __name__ == '__main__':
                           list(CloseRouter.urls) +
                           #list(WeioAPIBridgeRouter.urls) +
                           [(r"/editor",WeioEditorWebHandler)] +
-                          [(r"/", WeioIndexHandler),(r"/(.*)", web.StaticFileHandler,{"path": "./static"})], debug=True
+                          [(r"/", WeioIndexHandler),(r"/(.*)", web.StaticFileHandler,{"path": "./static"})], 
+                          debug=True
                           )
                           # DEBUG WILL DECREASE SPEED!!! HOW TO AVOID THIS???
         
