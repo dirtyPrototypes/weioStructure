@@ -579,18 +579,16 @@ Nodesign.net 2013 -->
       
 	
 	<div id="sidebar"><h1>Weio</h1>
-	    <button id="hide" class="open"><i class="icon-play"></i></button>
+	    <button id="hide" class="open">
+	        <i class="icon-chevron-left"></i>
+	    </button>
 		<a id="play" onclick="play()"></a>
-		<div id="monitor">
-			<aside id="status">ON</aside>
-			<aside>Weio 0.5</aside>
-			<a id="parameters"><i class="icon-cog"></i></a>
-		</div>
+		
 
 <!-- FILE TREE TEMPLATE STARTS HERE -->
 		<ol class="tree">
 			<li>
-				<label for="folder1">my Awesome Project</label> <input type="checkbox" id="folder1" /> 
+				<label for="folder1">MyFirstProject</label> <input type="checkbox" id="folder1" /> 
 				<ol>
 					<li class="file">
 						
@@ -690,10 +688,10 @@ Nodesign.net 2013 -->
 <!--Sidebar Resize animation START -->
 <script>
 $("#hide").click(function(){
-	
+
 if ($(this).is(".open")) {
-  	$( "#sidebar" ).animate( { left: "-160px" }, { queue: false, duration: 100 });
-    $( "#main_container" ).animate( { paddingLeft: "60px" }, { queue: false, duration: 100 });
+  	$( "#sidebar" ).animate( { left: "-180px" }, { queue: false, duration: 100 });
+    $( "#main_container" ).animate( { paddingLeft: "36px" }, { queue: false, duration: 100 });
 	$(this).attr('class', 'closed');
 } 
 else if ($(this).is(".closed")) {

@@ -5329,14 +5329,16 @@ a {
   z-index: 1000;
 }
 #sidebar #hide {
+  color: white;
   display: block;
-  width: 8px;
+  width: 23px;
   height: 25px;
   padding: 6px;
-  background: black;
+  background: transparent;
+  border: 0;
   position: relative;
   top: 40%;
-  left: 189px;
+  left: 179px;
 }
 #sidebar #play {
   display: block;
@@ -5408,46 +5410,6 @@ a {
   padding: 48px;
   padding-left: 220px;
 }
-/*
-.navbar-fixed-top {
-	position: relative;
-	padding-right: 200px;
-	height: 45px;
-	right: 0px;
-	left: -20px;
-	top: -20px;
-	z-index: 1030;
-	margin-bottom: 0;
-}
-
-.navbar .navbar-inner {
-	background: white;
-	border: none;
-	height: 45px;
-	box-shadow: rgba(0,0,0,0.2) 0px 2px 4px; 
-	
-}
-
-.container-fluid {
-	height:45px !important;
-}
-
-.navbar .brand {
-	padding: 0 0 0 15px !important;
-	height: 45px;
-	line-height: 45px;
-	color: rgb(120,120,120);
-	text-shadow: none;
-	&:hover {
-		color: rgb(120,120,120);
-	};
-}
-.navbar-search {
-position: relative;
-right:-8px;
-margin-top: 8px;
-}
-*/
 #coding_zone {
   width: 48%;
   height: 100%;
