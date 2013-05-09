@@ -47,7 +47,7 @@ right: 3px;
 	position: relative;
 	display: inline-block;
 	float: left;
-	margin-left:83px;
+	margin-left:37px;
 
 }
 
@@ -59,6 +59,11 @@ right: 3px;
 
 .navbar-search {
 	margin-right:5px;
+	
+}
+
+#statusBar {
+	margin-left:100px;
 	
 }
 
@@ -89,7 +94,7 @@ right: 3px;
         z-index: 1000;
 
 
-		#hide {
+		#hideLeftSidebar {
 			color:white;
 			display: block;
 			width: 23px;
@@ -99,9 +104,9 @@ right: 3px;
 			border:0;
 			position: relative;
 			top: 40%;
-			left: 179px;
+			left: 89%;
 		}
-
+/*
         #play {
          display: block;
          position: absolute;
@@ -109,8 +114,6 @@ right: 3px;
          top: 12px;
          width: 20px;
          height: 22px;
-         /*background: url(../img/bt_play.png) no-repeat 0px 0px;*/
-         /*text-indent: -1000em;*/
          text-decoration : none;
          color : white;
          margin: 0;
@@ -121,7 +124,9 @@ right: 3px;
          };
         
          }
-         #monitor {
+*/
+
+        #monitor {
         display: block;
         position: absolute;
         bottom: 0;
@@ -136,7 +141,8 @@ right: 3px;
         padding-left: 0px;
         float: left;   
         }
-        #status {
+        
+		#status {
             display: block;
             height: 10px;
             width: 10px;
@@ -164,7 +170,11 @@ right: 3px;
         }
         }
     }
+
+
+
 #main_container { 
+	
         width: 100%;
         height: 100%;
         position: fixed;
@@ -172,7 +182,46 @@ right: 3px;
         padding: 48px;
         padding-left: 220px;
 
-    }
+	#sidebarConsole {
+		
+		 width: 35%;
+	     height: 100%;
+	     position: fixed;
+		 top:0px;
+	     right: 0;
+	     background: #22262e;
+	     z-index: 1000;
+	
+		#hideRightSidebar {
+			color:white;
+			display: block;
+			width: 23px;
+			height: 25px;
+			background: transparent;
+			border:0;
+			position: relative;
+			top: 50%;
+			left: 0%;
+		}
+		
+	
+	}
+	
+	
+	#widget_zone {
+	    width: 94%;
+	    padding: 50px;
+	    padding-right: 12px;
+	    height: 100%;
+
+	    float: right;
+
+	}
+
+
+}
+
+
 
 
 
@@ -211,15 +260,6 @@ right: 3px;
     }
 }    
     
-#widget_zone {
-        width: 40%;
-        padding: 0;
-        padding-right: 100px;
-        height: 100%;
-        
-        float: left;
-   
-} 
 
 .fullheight {
     overflow-x: hidden;

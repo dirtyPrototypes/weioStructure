@@ -43,7 +43,7 @@ a {
   position: relative;
   display: inline-block;
   float: left;
-  margin-left: 83px;
+  margin-left: 37px;
 }
 .navbar .btn,
 .navbar .btn-group {
@@ -53,6 +53,9 @@ a {
 }
 .navbar-search {
   margin-right: 5px;
+}
+#statusBar {
+  margin-left: 100px;
 }
 /* IFRAME */
 .iframeContainer {
@@ -76,8 +79,28 @@ a {
   left: 0;
   background: #22262e;
   z-index: 1000;
+  /*
+        #play {
+         display: block;
+         position: absolute;
+         left: 168px;
+         top: 12px;
+         width: 20px;
+         height: 22px;
+         text-decoration : none;
+         color : white;
+         margin: 0;
+         opacity: 0.7;
+         cursor: pointer;
+         &:hover {
+           opacity: 1; 
+         };
+        
+         }
+*/
+
 }
-#sidebar #hide {
+#sidebar #hideLeftSidebar {
   color: white;
   display: block;
   width: 23px;
@@ -87,27 +110,7 @@ a {
   border: 0;
   position: relative;
   top: 40%;
-  left: 179px;
-}
-#sidebar #play {
-  display: block;
-  position: absolute;
-  left: 168px;
-  top: 12px;
-  width: 20px;
-  height: 22px;
-  /*background: url(../img/bt_play.png) no-repeat 0px 0px;*/
-
-  /*text-indent: -1000em;*/
-
-  text-decoration: none;
-  color: white;
-  margin: 0;
-  opacity: 0.7;
-  cursor: pointer;
-}
-#sidebar #play:hover {
-  opacity: 1;
+  left: 89%;
 }
 #sidebar #monitor {
   display: block;
@@ -159,6 +162,33 @@ a {
   padding: 48px;
   padding-left: 220px;
 }
+#main_container #sidebarConsole {
+  width: 35%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  right: 0;
+  background: #22262e;
+  z-index: 1000;
+}
+#main_container #sidebarConsole #hideRightSidebar {
+  color: white;
+  display: block;
+  width: 23px;
+  height: 25px;
+  background: transparent;
+  border: 0;
+  position: relative;
+  top: 50%;
+  left: 0%;
+}
+#main_container #widget_zone {
+  width: 94%;
+  padding: 50px;
+  padding-right: 12px;
+  height: 100%;
+  float: right;
+}
 #coding_zone {
   width: 48%;
   height: 100%;
@@ -190,13 +220,6 @@ a {
 }
 #saveButton:hover {
   opacity: 1;
-}
-#widget_zone {
-  width: 40%;
-  padding: 0;
-  padding-right: 100px;
-  height: 100%;
-  float: left;
 }
 .fullheight {
   overflow-x: hidden;

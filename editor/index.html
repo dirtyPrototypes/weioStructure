@@ -518,7 +518,7 @@ Nodesign.net 2013 -->
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#"><img src="./img/weioLogo.png"></img></a>
+            <a class="brand" href="#"><img src="./img/weioLogo.png"></img> <span class="label">Alpha</span> </a>
             <div class="nav-collapse collapse">
               <ul class="nav">
 
@@ -558,9 +558,10 @@ Nodesign.net 2013 -->
                   </div>
                   
                   
-                  <a class="btn" id="play" onclick="play()">
-                        Play
-                  </a>
+                  <a class="btn" id="statusBar" onclick="play()"> 
+                        <i class="icon-refresh icon-spin"></i>   Running...
+                 </a>
+                  
 
 
                   <div class="btn-group pull-right">
@@ -588,10 +589,9 @@ Nodesign.net 2013 -->
       
 	
 	<div id="sidebar"><h1>Weio</h1>
-	    <button id="hide" class="open">
-	        <i class="icon-chevron-left"></i>
+	    <button id="hideLeftSidebar" class="open">
+	        <i id="leftSidebarIcon" class="icon-chevron-left"></i>
 	    </button>
-		<a id="play" onclick="play()"></a>
 		
 
 <!-- FILE TREE TEMPLATE STARTS HERE -->
@@ -661,7 +661,11 @@ Nodesign.net 2013 -->
 
 		</div id="coding_zone">
 
-	
+	<div id="sidebarConsole">
+	        <button id="hideRightSidebar" class="open">
+    	        <i id="rightSidebarIcon" class="icon-chevron-right"></i>
+    	    </button>
+	    
 			<div id="widget_zone">
 
 			  <div class="accordion-right" id="accordionW1">
@@ -692,27 +696,53 @@ Nodesign.net 2013 -->
 			</div>
 
 			</div>
+	</div>
 			</div id="main_container">
     
 <!--Sidebar Resize animation START -->
 <script>
-$("#hide").click(function(){
+$("#hideLeftSidebar").click(function(){
 
 if ($(this).is(".open")) {
   	$( "#sidebar" ).animate( { left: "-180px" }, { queue: false, duration: 100 });
     $( "#main_container" ).animate( { paddingLeft: "36px" }, { queue: false, duration: 100 });
     $( "#coding_zone" ).animate( { width: "96%" }, { queue: false, duration: 100 });
+    $( "#leftSidebarIcon" ).attr("class", "icon-chevron-right");
 	$(this).attr('class', 'closed');
 } 
 else if ($(this).is(".closed")) {
  	$( "#sidebar" ).animate( { left: "0px" }, { queue: false, duration: 100 });
     $( "#main_container" ).animate( { paddingLeft: "220px" }, { queue: false, duration: 100 });
     $( "#coding_zone" ).animate( { width: "48%" }, { queue: false, duration: 100 });
+    $( "#leftSidebarIcon" ).attr("class", "icon-chevron-left");
 	$(this).attr('class', 'open');
 } else {
 }
 
 });
+
+
+$("#hideRightSidebar").click(function(){
+
+if ($(this).is(".open")) {
+  	$( "#sidebarConsole" ).animate( { right: "-33.8%" }, { queue: false, duration: 100 });
+    $( "#main_container" ).animate( { paddingLeft: "36px" }, { queue: false, duration: 100 });
+    $( "#coding_zone" ).animate( { width: "96%" }, { queue: false, duration: 100 });
+    $( "#rightSidebarIcon" ).attr("class", "icon-chevron-left");
+	$(this).attr('class', 'closed');
+} 
+else if ($(this).is(".closed")) {
+ 	$( "#sidebarConsole" ).animate( { right: "0px" }, { queue: false, duration: 100 });
+    $( "#main_container" ).animate( { paddingLeft: "220px" }, { queue: false, duration: 100 });
+    $( "#coding_zone" ).animate( { width: "48%" }, { queue: false, duration: 100 });
+    $( "#rightSidebarIcon" ).attr("class", "icon-chevron-right");
+	$(this).attr('class', 'open');
+} else {
+}
+
+});
+
+
  
 </script>
  <!--Sidebar Resize animation END-->
