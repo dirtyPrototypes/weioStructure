@@ -8,7 +8,7 @@ from editor import Editor #, WeioEditorStopHandler, WeioEditorPlayHandler
 
 class WeioIndexHandler(web.RequestHandler):
     def get(self):
-        self.render('static/index.html', error="")
+        self.render('static/preview.html', error="")
         
 class WeioEditorWebHandler(web.RequestHandler):
     def get(self):

@@ -508,6 +508,75 @@ Nodesign.net 2013 -->
     
 </head>
 <body>
+    
+    <!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#"><img src="./img/weioLogo.png"></img></a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">MyFirstProject <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <li><a tabindex="-1" href="#">Create new project</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="-1" href="#">MyFirstProject</a></li>
+
+                        <li class="divider"></li>
+
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="#">Examples</a>
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="#">iPhoneHelloWorld</a></li>
+                                <li><a tabindex="-1" href="#">Oscilloscope</a></li>
+                            </ul>
+                         </li>
+
+                    </ul>
+                  </li>
+
+                  <li><a href="/">Preview</a></li>
+                  <li class="active"><a href="/editor">Editor</a></li>
+
+
+                  <div class="btn-group pull-right">
+                  	<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    					<i class="icon-user"></i> root	<span class="caret"></span>
+    				</a>
+    				<ul class="dropdown-menu">
+    					<li><a href="#"><i class="icon-wrench"></i> Settings</a></li>
+    					<li class="divider"></li>
+    					<li><a href="#"><i class="icon-share"></i> Logout</a></li>
+      					</ul>
+                  </div>
+
+
+                  <div class="btn-group pull-right">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="icon-signal"></i>
+                      AP WEIO
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a tabindex="-1" href="#">Refresh wireless</a></li>    
+                    </ul>
+                 </div>
+
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div> <!-- /Fixed navbar -->
+      
+      
+      
 	
 	<div id="sidebar"><h1>Weio</h1>
 	    <button id="hide" class="open"><i class="icon-play"></i></button>
@@ -538,30 +607,7 @@ Nodesign.net 2013 -->
 	</div id="sidebar">
 
 	<div id="main_container">
-	    
-	    <!-- HEADER BAR -->
-	    
-	    <div class="navbar navbar navbar-fixed-top">
-          <div class="navbar-inner">
-            <div class="container-fluid">
-              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="brand" href="#">Project name</a>
-              <form class="navbar-search pull-right">
-                <input type="text" class="search-query" placeholder="Search">
-              </form>
-                
-              
-            </div>
-          </div>
-        </div class="navbar navbar-inverse navbar-fixed-top">
-    	
-	    
-	    <!-- END HEADER BAR -->
-	    
+	     
 		<div id="coding_zone">
 
 <!-- EDITOR TEMPLATE STARTS HERE -->
