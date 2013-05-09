@@ -692,11 +692,13 @@ $("#hide").click(function(){
 if ($(this).is(".open")) {
   	$( "#sidebar" ).animate( { left: "-180px" }, { queue: false, duration: 100 });
     $( "#main_container" ).animate( { paddingLeft: "36px" }, { queue: false, duration: 100 });
+    $( "#coding_zone" ).animate( { width: "96%" }, { queue: false, duration: 100 });
 	$(this).attr('class', 'closed');
 } 
 else if ($(this).is(".closed")) {
  	$( "#sidebar" ).animate( { left: "0px" }, { queue: false, duration: 100 });
     $( "#main_container" ).animate( { paddingLeft: "220px" }, { queue: false, duration: 100 });
+    $( "#coding_zone" ).animate( { width: "48%" }, { queue: false, duration: 100 });
 	$(this).attr('class', 'open');
 } else {
 }
