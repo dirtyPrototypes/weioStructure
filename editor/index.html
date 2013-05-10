@@ -461,7 +461,7 @@ Nodesign.net 2013 -->
 				
 				consoleOutput = "";
 				
-				for (var i=0; i<consoleData.length; i++) {
+				for (var i=consoleData.length-1; i>0; i--) {
 				    consoleData[i] = consoleData[i].replace("\n", "<BR>");
 				    consoleOutput+=consoleData[i];
 				}
@@ -482,7 +482,7 @@ Nodesign.net 2013 -->
 				
 				consoleOutput = "";
 				
-				for (var i=0; i<consoleData.length; i++) {
+				for (var i=consoleData.length-1; i>0; i--) {
 				    consoleData[i] = consoleData[i].replace("\n", "<BR>");
 				    consoleOutput+=consoleData[i];
 				}
