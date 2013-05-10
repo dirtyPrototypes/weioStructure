@@ -56,6 +56,16 @@ a {
 }
 #statusBar {
   margin-left: 100px;
+  margin-top: 7px;
+  width: 180px;
+  height: 23px;
+  text-align: center;
+}
+#statusIcon {
+  margin-right: 8px;
+}
+#statusBarText {
+  margin-top: 4px;
 }
 /* IFRAME */
 .iframeContainer {

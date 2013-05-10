@@ -390,6 +390,15 @@ Nodesign.net 2013 -->
 		updatePlayStatus();
 	}
 	
+	// This function sets coresponding icon and message inside statusBar in the middle of header. Icon is string format defined in font
+	// awesome library, message is string format
+	
+	function setStatus(icon, message) {
+	    
+	    $( "#statusBar" ).html('<p id="statusBarText"><i id="statusIcon" class="' + icon + '"></i>' + message + '</p>');
+	    
+	}
+	
 	
 	//////////////////////////////////////////////////////////////// SOCK JS
 	
@@ -401,6 +410,7 @@ Nodesign.net 2013 -->
     	console.log('socket opened for editor');
 		var askForFileListRequest = { "request": "getFileList" };
 		baseFiles.send(JSON.stringify(askForFileListRequest));
+		setStatus("icon-play", "Connected");
 		console.log('sending... ' + JSON.stringify(askForFileListRequest));
     };
 	
@@ -508,7 +518,9 @@ Nodesign.net 2013 -->
     }
 
     baseFiles.onclose = function() {
-        console.log('socket is closed for editor');    
+        console.log('socket is closed for editor');
+        setStatus("icon-ban-circle", "Connection closed")
+            
     };
 
     
@@ -569,9 +581,11 @@ Nodesign.net 2013 -->
                   </div>
                   
                   
-                  <a class="btn" id="statusBar" onclick="play()"> 
-                        <i id="statusIcon" class="icon-play"></i>   Idle
-                 </a>
+                 <!-- <a class="btn" id="statusBar" onclick="play()"> -->
+                        <span class="label label" id="statusBar">
+                         <i id="statusIcon" class="icon-play"></i>
+                         </span>
+                 <!-- </a> -->
                   
 
 
