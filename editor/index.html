@@ -365,6 +365,9 @@ Nodesign.net 2013 -->
 	}
 	
 	function play() {
+	    
+	    $( "#statusBar" ).html('<i id="statusIcon" class="icon-refresh icon-spin"></i>   Running...');
+	    
 		save("weio_main.py");
 		var askForFileListRequest = { "request": "play"};
 		baseFiles.send(JSON.stringify(askForFileListRequest));
@@ -373,6 +376,9 @@ Nodesign.net 2013 -->
 	}
 	
 	function stop() {
+	    $( "#statusIcon" ).attr("class", "icon-play");
+	    $( "#statusBar" ).html(" Stopped");
+	    
 		var askForFileListRequest = { "request": "stop"};
 		baseFiles.send(JSON.stringify(askForFileListRequest));
 		isPlaying = false;
@@ -559,7 +565,7 @@ Nodesign.net 2013 -->
                   
                   
                   <a class="btn" id="statusBar" onclick="play()"> 
-                        <i class="icon-refresh icon-spin"></i>   Running...
+                        <i id="statusIcon" class="icon-play"></i>   Idle
                  </a>
                   
 
@@ -704,19 +710,33 @@ Nodesign.net 2013 -->
 $("#hideLeftSidebar").click(function(){
 
 if ($(this).is(".open")) {
+    
+    if ($('#hideRightSidebar').hasClass('open')) {
+        $( "#coding_zone" ).animate( { width: "61.5%" }, { queue: false, duration: 100 });
+    } else {
+        $( "#coding_zone" ).animate( { width: "96%" }, { queue: false, duration: 100 });
+    }
+  	
   	$( "#sidebar" ).animate( { left: "-180px" }, { queue: false, duration: 100 });
-    $( "#main_container" ).animate( { paddingLeft: "36px" }, { queue: false, duration: 100 });
-    $( "#coding_zone" ).animate( { width: "96%" }, { queue: false, duration: 100 });
+    $( "#main_container" ).animate( { paddingLeft: "2.5%" }, { queue: false, duration: 100 });
+    
     $( "#leftSidebarIcon" ).attr("class", "icon-chevron-right");
 	$(this).attr('class', 'closed');
 } 
 else if ($(this).is(".closed")) {
+    
+    if ($('#hideRightSidebar').hasClass('open')) {
+        $( "#coding_zone" ).animate( { width: "49%" }, { queue: false, duration: 100 });
+    } else {
+        $( "#coding_zone" ).animate( { width: "83%" }, { queue: false, duration: 100 });
+    }
+    
+    
  	$( "#sidebar" ).animate( { left: "0px" }, { queue: false, duration: 100 });
-    $( "#main_container" ).animate( { paddingLeft: "220px" }, { queue: false, duration: 100 });
-    $( "#coding_zone" ).animate( { width: "48%" }, { queue: false, duration: 100 });
+    $( "#main_container" ).animate( { paddingLeft: "15%" }, { queue: false, duration: 100 });
+    
     $( "#leftSidebarIcon" ).attr("class", "icon-chevron-left");
 	$(this).attr('class', 'open');
-} else {
 }
 
 });
@@ -725,19 +745,38 @@ else if ($(this).is(".closed")) {
 $("#hideRightSidebar").click(function(){
 
 if ($(this).is(".open")) {
+    
+    if ($('#hideLeftSidebar').hasClass('open')) {
+        $( "#coding_zone" ).animate( { width: "83%" }, { queue: false, duration: 100 });
+        $( "#main_container" ).animate( { paddingLeft: "15%" }, { queue: false, duration: 100 });
+    } else {
+        $( "#coding_zone" ).animate( { width: "96%" }, { queue: false, duration: 100 });
+        $( "#main_container" ).animate( { paddingLeft: "2.5%" }, { queue: false, duration: 100 });
+    }
+    
   	$( "#sidebarConsole" ).animate( { right: "-33.8%" }, { queue: false, duration: 100 });
-    $( "#main_container" ).animate( { paddingLeft: "36px" }, { queue: false, duration: 100 });
-    $( "#coding_zone" ).animate( { width: "96%" }, { queue: false, duration: 100 });
+    
+    
     $( "#rightSidebarIcon" ).attr("class", "icon-chevron-left");
 	$(this).attr('class', 'closed');
-} 
+}
+ 
 else if ($(this).is(".closed")) {
+    
+    if ($('#hideLeftSidebar').hasClass('open')) {
+        $( "#coding_zone" ).animate( { width: "49%" }, { queue: false, duration: 100 });
+        $( "#main_container" ).animate( { paddingLeft: "15%" }, { queue: false, duration: 100 });
+    } else {
+        $( "#coding_zone" ).animate( { width: "61.5%" }, { queue: false, duration: 100 });
+        $( "#main_container" ).animate( { paddingLeft: "2.5%" }, { queue: false, duration: 100 });
+    }
+    
+    
  	$( "#sidebarConsole" ).animate( { right: "0px" }, { queue: false, duration: 100 });
-    $( "#main_container" ).animate( { paddingLeft: "220px" }, { queue: false, duration: 100 });
-    $( "#coding_zone" ).animate( { width: "48%" }, { queue: false, duration: 100 });
+    
+    
     $( "#rightSidebarIcon" ).attr("class", "icon-chevron-right");
 	$(this).attr('class', 'open');
-} else {
 }
 
 });

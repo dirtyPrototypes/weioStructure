@@ -22,7 +22,7 @@ def send_request():
         #time.sleep(0.5)
         #digitalWrite(pin, LOW)
         print(a)
-        time.sleep(0.5)
+        time.sleep(0.1)
     
     print "waiting"
     time.sleep(3)

@@ -5366,6 +5366,7 @@ a {
   position: relative;
   top: 40%;
   left: 89%;
+  z-index: 1000;
 }
 #sidebar #monitor {
   display: block;
@@ -5424,7 +5425,7 @@ a {
   top: 0px;
   right: 0;
   background: #22262e;
-  z-index: 1000;
+  z-index: 999;
 }
 #main_container #sidebarConsole #hideRightSidebar {
   color: white;
@@ -5436,6 +5437,7 @@ a {
   position: relative;
   top: 50%;
   left: 0%;
+  z-index: 1000;
 }
 #main_container #widget_zone {
   width: 94%;
