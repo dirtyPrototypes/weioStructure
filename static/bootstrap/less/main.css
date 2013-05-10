@@ -184,9 +184,13 @@ a {
   left: 0%;
   z-index: 1000;
 }
+#main_container #sidebarConsole #consoleAccordion {
+  max-height: 40%;
+  overflow: auto;
+}
 #main_container #widget_zone {
   width: 94%;
-  padding: 50px;
+  padding: 25px;
   padding-right: 12px;
   height: 100%;
   float: right;

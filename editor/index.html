@@ -27,17 +27,22 @@ Nodesign.net 2013 -->
 	<script src="js/sockjs-0.3.min.js"></script>
 
 	<script>
-	// Get windows size, get number of collapse elements and calculate maximum height to fill the column
-	var viewportHeight = $(window).height();
-
+	
 	// Global function. Can be recalled when adding a new stripe to recalculate max height value
 	function update_height() {
+	    
+	    // Get windows size, get number of collapse elements and calculate maximum height to fill the column
+    	var viewportHeight = $(window).height();
+        
 		var numRows = $('.codebox').length;
 		//console.log("rows : " + numRows + " array elements " + editors.length);
-		var finalheight = viewportHeight - (numRows * 40) - 60;
+		var finalheight = viewportHeight - (numRows * 40) - 75;
 		var widgetheight = viewportHeight - 140;
 		$('.code_wrap').css('min-height', finalheight);
 		$('.fullheight').css('height', widgetheight);
+		
+		$('#consoleAccordion').css('max-height', viewportHeight - (2 * 40) - 75);
+		
 	}
 
 	// ace code editors are stored in this array
@@ -682,7 +687,7 @@ Nodesign.net 2013 -->
 			      </a>
 			    </div>
 			    <div id="collapseW1" class="accordion-body collapse in">
-			      <div class="accordion-inner">
+			      <div class="accordion-inner" id="consoleAccordion">
 			    	<p id="consoleOutput"></p>
 			      </div>
 			    </div>
