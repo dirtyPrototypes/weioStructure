@@ -91,9 +91,10 @@ Nodesign.net 2013 -->
 	
 	function updatePlayStatus() {
 		if (isPlaying) {
-			$('#play').html('<i class="icon-pause"></i>');
+			setStatus("icon-spinner icon-spin", "Running weio_main");
 		} else {
-			$('#play').html('<i class="icon-play"></i>');
+			setStatus("icon-pause", "weio_main stopped");
+			window.setTimeout("setStatus(null, 'Ready')", 1000);
 		}
 	}
 	
@@ -380,6 +381,7 @@ Nodesign.net 2013 -->
 		updatePlayStatus();
 	}
 	
+	
 	function stop() {
 	    $( "#statusIcon" ).attr("class", "icon-play");
 	    $( "#statusBar" ).html(" Stopped");
@@ -390,27 +392,55 @@ Nodesign.net 2013 -->
 		updatePlayStatus();
 	}
 	
+	
+	// this function makes backup of all opened files, saves them then lauch preview screen
+	function runPreview() {
+	    
+	    var nameList = [];
+	    
+	    // make list of files to be saved
+        // and backup files on server
+	    for (var i=0; i<editorData.editors.length; i++) {
+	        nameList.push(editorData.editors[i].name);
+	        save(nameList[i]);
+	    }
+	    //console.log(nameList);
+	    
+	    var storeProject = { "request": "storeProjectPreferences", "data" : nameList };
+	    baseFiles.send(JSON.stringify(storeProject));
+        
+	    // when storing is confirmed than preview will be activated
+	    setStatus("icon-refresh icon-spin", "Sync")
+	    //console.log(storeProject);
+	}
+	
 	// This function sets coresponding icon and message inside statusBar in the middle of header. Icon is string format defined in font
 	// awesome library, message is string format
+	// If icon is not desired you can pass null as argument : setStatus(null, "hello world");
 	
 	function setStatus(icon, message) {
 	    
-	    $( "#statusBar" ).html('<p id="statusBarText"><i id="statusIcon" class="' + icon + '"></i>' + message + '</p>');
-	    
+	    if (icon!=null) 
+	        $( "#statusBar" ).html('<p id="statusBarText"><i id="statusIcon" class="' + icon + '"></i>' + message + '</p>');
+         else 
+            $( "#statusBar" ).html('<p id="statusBarText">' + message + '</p>');
+        
+        
 	}
 	
 	
 	//////////////////////////////////////////////////////////////// SOCK JS
 	
 	//var baseFiles = new SockJS(document.URL + 'editor/baseFiles');
-	var baseFiles = new SockJS('http://localhost:8081/' + 'editor/baseFiles');
+	var baseFiles = new SockJS('http://192.168.10.183:8081/' + 'editor/baseFiles');
 	var fileList;
 	
 	baseFiles.onopen = function() {
     	console.log('socket opened for editor');
 		var askForFileListRequest = { "request": "getFileList" };
 		baseFiles.send(JSON.stringify(askForFileListRequest));
-		setStatus("icon-play", "Connected");
+		setStatus("icon-link", "Connected");
+		window.setTimeout("setStatus(null, 'Ready')",1000);
 		console.log('sending... ' + JSON.stringify(askForFileListRequest));
     };
 	
@@ -418,7 +448,10 @@ Nodesign.net 2013 -->
     	//console.log('Received: ' + e.data);
 		data = JSON.parse(e.data);
 		
+		
 		// switch
+		
+		
 		
 		if ("requested" in data) {
 			
@@ -432,6 +465,9 @@ Nodesign.net 2013 -->
 				
 				editorData.tree = fileList.allFiles; 
 				initEditor();
+				
+				// install first index.html
+				addNewStrip("index.html");
 				
 				
 			} else if (instruction == "getFile") {
@@ -452,7 +488,14 @@ Nodesign.net 2013 -->
 				//std = 
 			 //$('#console').append(dssds);
 				
-			}
+			} else if (instruction == "storeProjectPreferences") {
+                
+                setStatus(null, "Ready");
+                window.location.href = "/";
+     		    
+
+     		}
+     		
 			
 		} else if ("serverPush" in data) {
 			
@@ -509,7 +552,7 @@ Nodesign.net 2013 -->
 			}
 			
 			
-		}
+		} 
 		
 		
 		//console.log('Received: ' + data.raw);
@@ -565,7 +608,7 @@ Nodesign.net 2013 -->
                     </ul>
                   </li>
 
-                  <li><a href="/">Preview</a></li>
+                  <li><a href="javascript:runPreview();">Preview</a></li>
                   <li class="active"><a href="/editor">Editor</a></li>
                 
                     
@@ -622,7 +665,7 @@ Nodesign.net 2013 -->
 <!-- FILE TREE TEMPLATE STARTS HERE -->
 		<ol class="tree">
 			<li>
-				<label for="folder1">MyFirstProject</label> <input type="checkbox" id="folder1" /> 
+				<label for="folder1">MyFirstProject</label> <input type="checkbox" id="folder1" checked /> 
 				<ol>
 					<li class="file">
 						

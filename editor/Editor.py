@@ -135,13 +135,23 @@ class WeioEditorHandler(SockJSConnection):
                callback = functools.partial(self.socket_connection_ready, sock)
                ioloopObj.add_handler(sock.fileno(), callback, ioloopObj.READ)
                
-           elif 'stop' in rg['request']:
+           elif 'stop' in rq['request']:
                weio_main.stop()
                data = {}
                data['serverPush'] = 'stopped'
                
+           elif 'storeProjectPreferences' in rq['request']:
+               projectStore = rq['data']
+               
+               print(rq['data'])
+               
+               # echo given request
+               data['requested'] = rq['request']
                self.send(json.dumps(data))
                
+               
+              
+  
                
     def socket_connection_ready(self, sock, fd, events):
        global stream
