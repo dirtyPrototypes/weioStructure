@@ -139,6 +139,7 @@ class WeioEditorHandler(SockJSConnection):
                weio_main.stop()
                data = {}
                data['serverPush'] = 'stopped'
+               self.send(json.dumps(data))
                
            elif 'storeProjectPreferences' in rq['request']:
                projectStore = rq['data']
@@ -201,14 +202,15 @@ class WeioEditorHandler(SockJSConnection):
         
        err = {}
        err['stderr'] = rcvd['stdout']
+       self.sendToBrowser(err) 
        
-       self.sendToBrowser(err)
            
        global stream
        stream.close()
        print "closed socket"
        print "<- EXIT on_close()"
        
+#TODO change this name cos it leads to confusion
     def sendToBrowser(self, rcvd) :
       # pack and send to client
       
@@ -229,10 +231,17 @@ class WeioEditorHandler(SockJSConnection):
         if status == 0:
             print "OK:"
             print stdout
+           
+               
         else:
             print "ERROR:"
+            
             print stdout
             print stderr
+            
+        data = {}
+        data['serverPush'] = 'stopped'
+        self.send(json.dumps(data))
                 
                 # 
                 # data  = {}

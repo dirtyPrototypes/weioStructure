@@ -93,8 +93,8 @@ Nodesign.net 2013 -->
 		if (isPlaying) {
 			setStatus("icon-spinner icon-spin", "Running weio_main");
 		} else {
-			setStatus("icon-pause", "weio_main stopped");
-			window.setTimeout("setStatus(null, 'Ready')", 1000);
+			setStatus("icon-stop", "weio_main stopped");
+			window.setTimeout("setStatus(null, 'Ready')", 3000);
 		}
 	}
 	
@@ -144,9 +144,13 @@ Nodesign.net 2013 -->
 				'div.editor@id' : 'editor.name',
 				
 				// save button
-				'i.icon-download-alt@onclick' : function getter(arg) {return "save('" + arg.item.name + "')"},
+				//'i.icon-download-alt@onclick' : function getter(arg) {return "save('" + arg.item.name + "')"},
 				
 				// close button
+				'i.icon-remove@onclick' : function getter(arg) {return "prepareToClose('" + arg.item.name + "')"},
+				
+				
+				/*
 				'i.icon-remove@onclick' : function getter(arg) {return "prepareToClose('" + arg.item.name + "')"},
 				
 				// modals
@@ -154,6 +158,7 @@ Nodesign.net 2013 -->
 				'p.removeModalPhrase' : function getter(arg) {return 'Do you want to save the changes you made in the current document ?';},
 				'button.btn-primary@onclick' : function getter(arg) {return "saveAndClose(true)"},
 				'#dontSave@onclick' : function getter(arg) {return "saveAndClose(false)";}
+				*/
 			}
 
 		}
@@ -272,6 +277,8 @@ Nodesign.net 2013 -->
 	// this function selects name of editor and strip that will be used to close it
 	function prepareToClose(name) {
 		selectedName = name;
+		saveAndClose(true);
+		setStatus("icon-refresh icon-spin", "Sync");
 	}
 	
 	function save(name) {
@@ -372,13 +379,21 @@ Nodesign.net 2013 -->
 	
 	function play() {
 	    
-	    $( "#statusBar" ).html('<i id="statusIcon" class="icon-refresh icon-spin"></i>   Running...');
 	    
-		save("weio_main.py");
+    	var nameList = [];
+	    // make list of files to be saved
+        // and backup files on server
+	    for (var i=0; i<editorData.editors.length; i++) {
+	        nameList.push(editorData.editors[i].name);
+	        save(nameList[i]);
+	    }
+	    
+	    
 		var askForFileListRequest = { "request": "play"};
 		baseFiles.send(JSON.stringify(askForFileListRequest));
 		isPlaying = true;
 		updatePlayStatus();
+		
 	}
 	
 	
@@ -494,7 +509,10 @@ Nodesign.net 2013 -->
                 window.location.href = "/";
      		    
 
-     		}
+     		} else if (instruction == "saveFile") {
+                if (isPlaying==false) setStatus(null, "Ready");
+                
+            }
      		
 			
 		} else if ("serverPush" in data) {
@@ -626,7 +644,7 @@ Nodesign.net 2013 -->
                   
                  <!-- <a class="btn" id="statusBar" onclick="play()"> -->
                         <span class="label label" id="statusBar">
-                         <i id="statusIcon" class="icon-play"></i>
+                         <i id="statusIcon" ></i>
                          </span>
                  <!-- </a> -->
                   
@@ -665,7 +683,8 @@ Nodesign.net 2013 -->
 <!-- FILE TREE TEMPLATE STARTS HERE -->
 		<ol class="tree">
 			<li>
-				<label for="folder1">MyFirstProject</label> <input type="checkbox" id="folder1" checked /> 
+				<label for="folder1">MyFirstProject</label> <input type="checkbox" id="folder1" checked />
+				<a href="javascript:play();" role="button" id="playButton"><i class="icon-play-circle icon-large" ></i></a>
 				<ol>
 					<li class="file">
 						
@@ -691,31 +710,13 @@ Nodesign.net 2013 -->
 
 					<div class="accordion-heading" id="template">
 						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"></a>
-
-						<!-- Button to trigger modal -->
-						<div class="actions">
-						<a href="#closeFileModal" role="button" id="closeButton" data-toggle="modal" ><i class="icon-remove"></i></a>
-						<a href="#saveFile" role="button" id="saveButton" data-toggle="modal"><i class="icon-download-alt"></i></a>
-						</div>
-						
-						<!-- Close Editor Modal -->
-						<div id="closeFileModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-								<h3 class = "removeModalPhrase" id="myModalLabel"></h3>
-							</div>
-							<div class="modal-body">
-								<p class = "removeModalPhrase"></p>
-								<p>Your changes will be lost if you don't save them</p>
-							</div>
-							<div class="modal-footer">
-								<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-								<button class="btn" id = "dontSave" data-dismiss="modal" aria-hidden="true">Don't save</button>
-								<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Save</button>
-							</div>
-						</div>
-						<!-- Close Editor Modal  END-->
-
+                        
+                        <!-- Button to close strip -->
+                        <div class="actions">
+                        <a role="button" id="closeButton"><i class="icon-remove"></i></a>
+                        <!-- <a href="#closeFileModal" role="button" id="playButton"><i class="icon-play" ></i></a> -->
+                        </div>
+                        						
 					</div>
 					<div class="accordion-body collapse in codebox" id="collapseOne">
 						<div class="accordion-inner code_wrap">
@@ -769,6 +770,9 @@ Nodesign.net 2013 -->
     
 <!--Sidebar Resize animation START -->
 <script>
+
+
+
 $("#hideLeftSidebar").click(function(){
 
 if ($(this).is(".open")) {
