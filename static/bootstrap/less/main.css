@@ -39,25 +39,30 @@ a {
   width: 100%;
 }
 .navbar .nav {
-  width: 85%;
+  width: 80.5%;
   position: relative;
   display: inline-block;
-  float: left;
-  margin-left: 37px;
+  float: right;
 }
 .navbar .btn,
 .navbar .btn-group {
+  display: inline-block;
   margin-top: 5px;
   margin-left: 2.5px;
   margin-right: 2.5px;
 }
 .navbar-search {
-  margin-right: 5px;
+  margin-top: 5px;
+  margin-left: 2.5px;
+  margin-right: 2.5px;
+}
+.milieu {
+  float: center;
 }
 #statusBar {
-  margin-left: 100px;
+  margin-left: 7%;
   margin-top: 7px;
-  width: 180px;
+  width: 18%;
   height: 23px;
   text-align: center;
 }
@@ -227,12 +232,15 @@ a {
 #playButton {
   display: block;
   position: relative;
-  float: right;
-  top: -33px;
-  margin: 10px;
+  float: center;
+  /*margin: 10px;*/
+
+  margin-left: 184px;
+  margin-top: -22px;
   cursor: pointer;
   text-decoration: none;
   color: white;
+  z-index: 1000;
 }
 #playButton:hover {
   opacity: 1;

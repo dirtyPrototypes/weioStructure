@@ -28,6 +28,14 @@ Nodesign.net 2013 -->
 
 	<script>
 	
+	//var baseFiles = new SockJS(document.URL + 'editor/baseFiles');
+	//var baseFiles = new WebSocket('ws://192.168.10.183:8081/' + 'editor/baseFiles');
+	var baseFiles = new SockJS('http://192.168.10.183:8081/' + 'editor/baseFiles');
+	
+	
+	
+	
+	
 	// Global function. Can be recalled when adding a new stripe to recalculate max height value
 	function update_height() {
 	    
@@ -407,10 +415,7 @@ Nodesign.net 2013 -->
 		updatePlayStatus();
 	}
 	
-	
-	// this function makes backup of all opened files, saves them then lauch preview screen
-	function runPreview() {
-	    
+	function backupOpenedFiles() {
 	    var nameList = [];
 	    
 	    // make list of files to be saved
@@ -419,11 +424,18 @@ Nodesign.net 2013 -->
 	        nameList.push(editorData.editors[i].name);
 	        save(nameList[i]);
 	    }
-	    //console.log(nameList);
 	    
 	    var storeProject = { "request": "storeProjectPreferences", "data" : nameList };
-	    baseFiles.send(JSON.stringify(storeProject));
-        
+    	baseFiles.send(JSON.stringify(storeProject));
+	    
+	}
+	// this function makes backup of all opened files, saves them then lauch preview screen
+	function runPreview() {
+	    
+	    backupOpenedFiles();
+	    
+	    //console.log(nameList);
+
 	    // when storing is confirmed than preview will be activated
 	    setStatus("icon-refresh icon-spin", "Sync")
 	    //console.log(storeProject);
@@ -446,8 +458,7 @@ Nodesign.net 2013 -->
 	
 	//////////////////////////////////////////////////////////////// SOCK JS
 	
-	//var baseFiles = new SockJS(document.URL + 'editor/baseFiles');
-	var baseFiles = new SockJS('http://192.168.10.183:8081/' + 'editor/baseFiles');
+	
 	var fileList;
 	
 	baseFiles.onopen = function() {
@@ -532,13 +543,15 @@ Nodesign.net 2013 -->
 				
 				consoleOutput = "";
 				
-				for (var i=consoleData.length-1; i>0; i--) {
+				for (var i=0; i<consoleData.length; i++) {
 				    consoleData[i] = consoleData[i].replace("\n", "<BR>");
 				    consoleOutput+=consoleData[i];
 				}
 				$('#consoleOutput').html(consoleOutput);
 				
 				console.log(stdout);
+				
+				//statusBar("icon-eye-open", "Console output");
 				
 				
 			} else if (demand == "stderr") {
@@ -553,7 +566,7 @@ Nodesign.net 2013 -->
 				
 				consoleOutput = "";
 				
-				for (var i=consoleData.length-1; i>0; i--) {
+				for (var i=0; i<consoleData.length; i++) {
 				    consoleData[i] = consoleData[i].replace("\n", "<BR>");
 				    consoleOutput+=consoleData[i];
 				}
@@ -561,6 +574,7 @@ Nodesign.net 2013 -->
 				
 				//errorInFile = data.errorInFile;
 				//errInLine = data.errInLine;
+				statusBar("icon-eye-open", "Console output : Error");
 				
 				console.log(stderr);
 			} else if (demand == "stopped") {
@@ -592,86 +606,88 @@ Nodesign.net 2013 -->
     
 </head>
 <body>
-    
+
     <!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#"><img src="./img/weioLogo.png"></img> <span class="label">Alpha</span> </a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">MyFirstProject <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    <li><a tabindex="-1" href="#">Create new project</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="-1" href="#">MyFirstProject</a></li>
-
-                        <li class="divider"></li>
-
-                        <li class="dropdown-submenu">
-                            <a tabindex="-1" href="#">Examples</a>
-                            <ul class="dropdown-menu">
-                                <li><a tabindex="-1" href="#">iPhoneHelloWorld</a></li>
-                                <li><a tabindex="-1" href="#">Oscilloscope</a></li>
-                            </ul>
-                         </li>
-
-                    </ul>
-                  </li>
-
-                  <li><a href="javascript:runPreview();">Preview</a></li>
-                  <li class="active"><a href="/editor">Editor</a></li>
+            <div class="container">
                 
-                    
-                  <div class="btn-group pull-right">
-                  	<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-    					<i class="icon-user"></i> root	<span class="caret"></span>
-    				</a>
-    				<ul class="dropdown-menu">
-    					<li><a href="#"><i class="icon-wrench"></i> Settings</a></li>
-    					<li class="divider"></li>
-    					<li><a href="#"><i class="icon-share"></i> Logout</a></li>
-      					</ul>
-                  </div>
-                  
-                  
-                 <!-- <a class="btn" id="statusBar" onclick="play()"> -->
-                        <span class="label label" id="statusBar">
-                         <i id="statusIcon" ></i>
-                         </span>
-                 <!-- </a> -->
-                  
+                <a class="brand" href="#"><img src="./img/weioLogo.png"></img> <span class="label">Alpha</span> </a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">MyFirstProject <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="#">Create new project</a></li>
+                                <li class="divider"></li>
+                                <li><a tabindex="-1" href="#">MyFirstProject</a></li>
+
+                                <li class="divider"></li>
+
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Examples</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a tabindex="-1" href="#">iPhoneHelloWorld</a></li>
+                                        <li><a tabindex="-1" href="#">Oscilloscope</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li><a href="javascript:runPreview();">Preview</a></li>
+                        <li class="active"><a href="/editor">Editor</a></li>
+
+                       
+
+                        <!-- <a class="btn" id="statusBar" onclick="play()"> -->
+                            <span class="label label" id="statusBar">
+                                <i id="statusIcon" ></i>
+                            </span>
+                            
+                            
+                            
+                            <div class="btn-group pull-right">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="icon-user"></i> root	<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"><i class="icon-wrench"></i> Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#"><i class="icon-share"></i> Logout</a></li>
+                                </ul>
+                            </div>
 
 
-                  <div class="btn-group pull-right">
-                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="icon-signal"></i>
-                      AP WEIO
-                      <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a tabindex="-1" href="#">Refresh wireless</a></li>    
-                    </ul>
-                 </div>
-                 
-                 <form class="navbar-search pull-right">
-                   <input type="text" class="search-query" placeholder="Search in project">
-                 </form>
-                 
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div>
+                            <div class="btn-group pull-right">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="icon-signal"></i>
+                                    AP WEIO
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="#">Refresh wireless</a></li>    
+                                </ul>
+                            </div>
+                         <!--   <form class="navbar-search pull-right">
+                                    <input type="text" class="search-query" placeholder="Search in project">
+                                </form> -->
+                            
+                         
+
+                            
+                            
+
+                        </ul>
+
+                    </div>
+                </div><!--/.nav-collapse -->
+            </div>
         </div>
-      </div> <!-- /Fixed navbar -->
-      
-      
+    </div> <!-- /Fixed navbar -->
+
+
       
 	
 	<div id="sidebar"><h1>Weio</h1>
@@ -685,6 +701,7 @@ Nodesign.net 2013 -->
 			<li>
 				<label for="folder1">MyFirstProject</label> <input type="checkbox" id="folder1" checked />
 				<a href="javascript:play();" role="button" id="playButton"><i class="icon-play-circle icon-large" ></i></a>
+			<!--	<a href="javascript:stop();" role="button" id="stopButton"><i class="icon-stop-circle icon-large" ></i></a> -->
 				<ol>
 					<li class="file">
 						

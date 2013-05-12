@@ -17,12 +17,12 @@ def send_request():
     print "hello"
     #pinMode(pin, OUTPUT)
     
-    for a in range(10) :
+    for a in range(100) :
         #digitalWrite(pin, HIGH)
         #time.sleep(0.5)
         #digitalWrite(pin, LOW)
         print(a)
-        time.sleep(0.1)
+        time.sleep(0.01)
     
     print "waiting"
     time.sleep(3)

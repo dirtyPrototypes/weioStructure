@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-from tornado import web, ioloop, iostream, options, httpserver, autoreload
+from tornado import web, ioloop, iostream, options, httpserver, autoreload, websocket
 from sockjs.tornado import SockJSRouter, SockJSConnection
 
 # IMPORT EDITOR CLASSES
@@ -14,13 +14,18 @@ class WeioEditorWebHandler(web.RequestHandler):
     def get(self):
         self.render('editor/index.html', error="")
 
+
+# pure websocket implementation
+#class CloseConnection(websocket.WebSocketHandler):
 class CloseConnection(SockJSConnection):
+
     def on_open(self, info):
         self.close()
 
     def on_message(self, msg):
         pass
         
+
 
 if __name__ == '__main__':
     import logging
@@ -53,6 +58,11 @@ if __name__ == '__main__':
     app = web.Application(list(WeioEditorRouter.urls) +
                           list(CloseRouter.urls) +
                           #list(WeioAPIBridgeRouter.urls) +
+                          
+                          # pure websocket implementation
+                          #[(r"/editor/baseFiles", Editor.WeioEditorHandler)] +
+                          #[(r"/close", CloseConnection)] +
+                          
                           [(r"/editor",WeioEditorWebHandler)] +
                           [(r"/", WeioIndexHandler),(r"/(.*)", web.StaticFileHandler,{"path": "./static"})], 
                           debug=True
