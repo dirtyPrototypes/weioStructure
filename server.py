@@ -83,7 +83,7 @@ if __name__ == '__main__':
     options.define("port", default=8081, type=int)
     
     http_server = httpserver.HTTPServer(app)
-    http_server.listen(options.options.port)
+    http_server.listen(options.options.port, address="0.0.0.0")
     
     #app.listen(8081)
     logging.info(" [*] Listening on 0.0.0.0:8081")
