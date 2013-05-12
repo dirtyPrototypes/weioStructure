@@ -18,11 +18,11 @@ Nodesign.net 2013 -->
 	<script src="js/jquery-2.0.0.min.js"></script>
 	
 	
-   	<script src="bootstrap/js/bootstrap.js"></script>
-	<script src="bootstrap/js/bootstrap-collapse.js"></script>
-	<script src="bootstrap/js/bootstrap-transition.js"></script>
-	<script src="bootstrap/js/bootstrap-modal.js"></script> 
-	
+	<!--       <script src="bootstrap/js/bootstrap.js"></script>
+	   <script src="bootstrap/js/bootstrap-collapse.js"></script>
+	   <script src="bootstrap/js/bootstrap-transition.js"></script>
+	   <script src="bootstrap/js/bootstrap-modal.js"></script> 
+	    -->
 	
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="Font-Awesome/css/font-awesome.min.css">
@@ -37,10 +37,10 @@ Nodesign.net 2013 -->
 	<script src="js/sockjs-0.3.min.js"></script>
 
 	<script>
-	
-	//var baseFiles = new SockJS(document.URL + 'editor/baseFiles');
+
+	var baseFiles = new SockJS(document.URL + '/baseFiles');
 	//var baseFiles = new WebSocket('ws://192.168.10.183:8081/' + 'editor/baseFiles');
-	var baseFiles = new SockJS('http://192.168.0.16:8081/' + 'editor/baseFiles');
+	//var baseFiles = new SockJS('http://192.168.0.16:8081/' + 'editor/baseFiles');
 	
 	
 	
